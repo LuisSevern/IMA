@@ -1,0 +1,114 @@
+@CHARSET "ISO-8859-1";
+
+.topheader {
+	background-image: url('../images/homepage_wsc-0-0_a.jpg');
+width: 1024px;
+height: 121px;
+}
+
+.topmenuA {
+background-image: url('../images/homepage_wsc-0-1d.jpg');
+width: 1024px;
+height: 11px;
+}
+
+.topmenuB {
+background-image: url('../images/homepage_wsc-0-2b.jpg');
+width: 1024px;
+height: 20px;
+}
+
+.topmenuC {
+background-image: url('../images/homepage_wsc-0-3c.jpg');
+width: 1024px;
+height: 11px;
+}
+
+.context { background-image:url('../images/homepage_wsc-0-4e.jpg');
+	color: #001084; 
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	width: 1024px;
+    height:100%;
+}
+
+.reference {
+  border-style: none;
+border-width: 3px;
+border-color: #009933;
+width: 1024px;
+height: 121px;
+}
+
+.bottom {
+	background-image: url('../images/homepage_wsc-0-5f.jpg');
+	width: 1024px;
+	height: 18px;
+}
+
+.toptitle{
+	text-align: right; /*css text property with value center*/
+	height:23px; /*the height of the element*/
+	line-height: 20px; /*the property line-height with value equal the height for the vertical align*/ 
+}
+
+h1 { 
+	 font-weight: bold;
+	 font-size: 14px;
+	 color: white;
+}
+
+h2 {
+		 font-size: 12px;
+	 font-family: sans-serif;
+}
+
+h3 {
+	font-size: 10px;
+	font-family: Tahoma, sans-serif;
+	font-weight: bold;
+}
+
+h4 {
+		 font-size: 12px;
+	 font-family: sans-serif;
+	 color:black;
+}
+
+h5 {
+	 font-weight: bold;
+	 font-size: 14px;
+	 color: red;
+}
+
+
+input.btn {
+background-color:#e6e6e6;
+	border:1px solid;
+	border-color: #001084;
+	color:#001084;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+font-size: 12px;
+font-weight: bold;
+}
+
+input.btn:hover {
+background-color:#001084;
+	color:white;
+	border:1px solid black;
+}
+
+input.txt
+{
+	background-color:#e6e6e6;
+	border:1px solid;
+	border-color:#001084;
+		font-family: Arial, Verdana, Helvetica, sans-serif;
+font-size: 12px;
+}
+
+.styled-select select {
+   background: transparent;
+   font-size: 16px;
+   border: 1px solid #ccc;
+}
+
