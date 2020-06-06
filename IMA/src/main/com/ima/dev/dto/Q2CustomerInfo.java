@@ -58,6 +58,13 @@ public class Q2CustomerInfo {
 	public void setInstallPoint(int installPoint) {
 		this.installPoint = installPoint;
 	}
+	@Override
+	public String toString() {
+		return "Q2CustomerInfo [workOrderID=" + workOrderID + ", customerFirstName=" + customerFirstName
+				+ ", customerLastName=" + customerLastName + ", premiseNumber=" + premiseNumber + ", premiseHouseName="
+				+ premiseHouseName + ", premiseStreet=" + premiseStreet + ", premiseCity=" + premiseCity
+				+ ", installPoint=" + installPoint + "]";
+	}
 	
 
 }

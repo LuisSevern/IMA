@@ -11,18 +11,10 @@
 					</li>
 				</ul></li>
 			<li><a href="#">Water</a>
-				<ul>
-					<li><a href="Q3changewmtype.jsp">Change MIU/Meter Type</a>
-					</li>
-					<li><a href="Q4changewmmiu.jsp">Change MIU/Meter Serial</a>
-					</li>
+				<ul>					
 					<li><a href="Q5changemiuport.jsp">Change MIU Port</a>
 					</li>
-					<li><a href="Q6changeinstallpointwater.jsp">Swap Install Point</a>
-					</li>
 					<li><a href="Q8changeinstallpointsinglewater.jsp">Change Install Point</a>
-					</li>
-					<li><a href="Q7swapwmmiumodule.jsp">Swap Module Connection</a>
 					</li>
 					<li><a href="Q9retrieveworkorder.jsp">Device Work Order</a>
 					</li>
