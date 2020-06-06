@@ -41,10 +41,6 @@ public class checkCredentialServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		logger.traceEntry("->");
-		logger.debug("Hola d");
-		logger.warn("Hola w");
-		logger.info("Hola i");
-		logger.error("Hola e");
 		HttpSession session = request.getSession(true);
 		session.setAttribute("username", request.getParameter("username"));
 		String password = request.getParameter("password");

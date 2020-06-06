@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import main.com.ima.dev.dto.LoggingPath;
 import main.com.ima.dev.service.DBConnection;
 
@@ -18,13 +21,12 @@ import main.com.ima.dev.service.DBConnection;
 public class Q2UpdateInstallPointServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final int WORK_ORDER_STATUS_CANCELLED = 6;
-       
+	private static final Logger logger = LogManager.getLogger(Q2UpdateInstallPointServlet.class);       
     /**
      * @see HttpServlet#HttpServlet()
      */
     public Q2UpdateInstallPointServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -32,9 +34,7 @@ public class Q2UpdateInstallPointServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
-		//Logging test
-		LoggingPath.setLpath(getServletContext().getRealPath("/logs/logs.txt"));
+		logger.info("Chagen Install Point.Update: Init ->");
 		
 		// First Request
 		String meterSN = request.getParameter("hiddenMeterSN");
@@ -53,10 +53,11 @@ public class Q2UpdateInstallPointServlet extends HttpServlet {
 			if(updateIP==true)
 			{
 				//change workorder status
-				boolean updateWOStatus = dbconn.updateWOStatus(WoPrefix(correctWO.substring(0,3)), Integer.parseInt(correctWO.substring(3,correctWO.length()).trim()));
+				boolean updateWOStatus = dbconn.updateWOStatus(woPrefix(correctWO.substring(0,3)), Integer.parseInt(correctWO.substring(3,correctWO.length()).trim()));
 				boolean updatePOD = dbconn.updatePOD(usedInstallPoint, usedWO);
-				dbconn.updateGenericWOStatus(WoPrefix(usedWO.substring(0, 3)), Integer.parseInt(usedWO.substring(3).trim()), WORK_ORDER_STATUS_CANCELLED);
+				dbconn.updateGenericWOStatus(woPrefix(usedWO.substring(0, 3)), Integer.parseInt(usedWO.substring(3).trim()), WORK_ORDER_STATUS_CANCELLED);
 				dbconn.closeConnection();
+				logger.info("Chagen Install Point.Update: Successful!");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("Q2changeinstallpointresult.jsp");
 				dispatcher.forward(request, response);
 			} else {
@@ -64,9 +65,9 @@ public class Q2UpdateInstallPointServlet extends HttpServlet {
 			}
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Chagen Install Point. Update: Exception:", e);
 		}
+		logger.info("Chagen Install Point.Update: End <-");
 	}
 	
 
@@ -74,10 +75,9 @@ public class Q2UpdateInstallPointServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
 	
-	public int WoPrefix(String prefix)
+	public int woPrefix(String prefix)
 	{
 		if(prefix.substring(0,3).contains("EXT"))
 		{

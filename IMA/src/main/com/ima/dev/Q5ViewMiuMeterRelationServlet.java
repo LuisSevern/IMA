@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import main.com.ima.dev.dto.LoggingPath;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import main.com.ima.dev.service.DBConnection;
 
 /**
@@ -18,22 +20,19 @@ import main.com.ima.dev.service.DBConnection;
 
 public class Q5ViewMiuMeterRelationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private static final Logger logger =  LogManager.getLogger(Q5ViewMiuMeterRelationServlet.class);       
     /**
      * @see HttpServlet#HttpServlet()
      */
     public Q5ViewMiuMeterRelationServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//Logging
-		LoggingPath.setLpath(getServletContext().getRealPath("/logs/logs.txt"));
+		logger.info("Chagen Miu Port. Init ->");
 	    //First Request
 		String miuSerial = request.getParameter("rfid");
 		try{		
@@ -54,9 +53,9 @@ public class Q5ViewMiuMeterRelationServlet extends HttpServlet {
 					dispatcher.forward(request, response);
 				}
 		}catch (Exception e) {
-				// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Change Miu Port. Exception", e);
 		}
+		logger.info("Chagen Miu Port. End <-");
 	}
 
 	/**
