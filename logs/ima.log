@@ -1,0 +1,41 @@
+[DEBUG] 2020-06-07 10:30:01.683 [main] DBConnection - IMA: DB connection opened
+[DEBUG] 2020-06-07 10:30:01.698 [main] DBConnection - returnCustomerInfo: Init->
+[DEBUG] 2020-06-07 10:30:01.761 [main] DBConnection - returnCustomerInfo. sql: [%s] - params: [%d %ld]
+[DEBUG] 2020-06-07 10:30:01.761 [main] DBConnection - returnCustomerInfo. Results: [%s] 
+[DEBUG] 2020-06-07 10:30:01.761 [main] DBConnection - returnCustomerInfo: End <-
+[DEBUG] 2020-06-07 10:30:16.797 [main] DBConnection - IMA: DB connection successfully closed
+[DEBUG] 2020-06-07 10:34:43.101 [main] DBConnection - IMA: DB connection opened
+[DEBUG] 2020-06-07 10:34:43.115 [main] DBConnection - returnCustomerInfo: Init->
+[DEBUG] 2020-06-07 10:34:43.116 [main] DBConnection - returnCustomerInfo. sql: [%s] - params: [%d %ld]
+[DEBUG] 2020-06-07 10:34:43.132 [main] DBConnection - returnCustomerInfo. Results: [%s] 
+[DEBUG] 2020-06-07 10:34:43.132 [main] DBConnection - returnCustomerInfo: End <-
+[DEBUG] 2020-06-07 10:34:43.132 [main] DBConnection - IMA: DB connection successfully closed
+[DEBUG] 2020-06-07 10:34:43.132 [main] DBConnection - IMA: DB connection opened
+[DEBUG] 2020-06-07 10:34:43.132 [main] DBConnection - countWoAndMeter. Init->
+[DEBUG] 2020-06-07 10:34:43.132 [main] DBConnection - countWoAndMeter. sql: [%s] - params: [%d %ld %s]
+[DEBUG] 2020-06-07 10:34:43.147 [main] DBConnection - countWoAndMeter. Result: [%d] 
+[DEBUG] 2020-06-07 10:34:43.147 [main] DBConnection - countWoAndMeter. End <-
+[DEBUG] 2020-06-07 10:34:43.147 [main] DBConnection - IMA: DB connection successfully closed
+[DEBUG] 2020-06-07 10:35:03.543 [main] DBConnection - IMA: DB connection opened
+[DEBUG] 2020-06-07 10:35:03.554 [main] DBConnection - countWoAndMeter. Init->
+[DEBUG] 2020-06-07 10:35:03.554 [main] DBConnection - countWoAndMeter. sql: [%s] - params: [%d %ld %s]
+[DEBUG] 2020-06-07 10:35:03.570 [main] DBConnection - countWoAndMeter. Result: [%d] 
+[DEBUG] 2020-06-07 10:35:03.570 [main] DBConnection - countWoAndMeter. End <-
+[DEBUG] 2020-06-07 10:43:09.621 [main] DBConnection - IMA: DB connection opened
+[DEBUG] 2020-06-07 10:43:09.629 [main] DBConnection - countWoAndMeter. Init->
+[DEBUG] 2020-06-07 10:43:09.629 [main] DBConnection - countWoAndMeter. sql: [%s] - params: [%d %ld %s]
+[DEBUG] 2020-06-07 10:43:09.645 [main] DBConnection - countWoAndMeter. Result: [%d] 
+[DEBUG] 2020-06-07 10:43:09.645 [main] DBConnection - countWoAndMeter. End <-
+[DEBUG] 2020-06-07 10:43:13.879 [main] DBConnection - IMA: DB connection successfully closed
+[DEBUG] 2020-06-07 10:44:08.024 [main] DBConnection - IMA: DB connection opened
+[DEBUG] 2020-06-07 10:44:08.035 [main] DBConnection - returnCustomerInfo: Init->
+[DEBUG] 2020-06-07 10:44:08.035 [main] DBConnection - returnCustomerInfo. sql: [%s] - params: [%d %ld]
+[DEBUG] 2020-06-07 10:44:08.050 [main] DBConnection - returnCustomerInfo. Results: [%s] 
+[DEBUG] 2020-06-07 10:44:08.050 [main] DBConnection - returnCustomerInfo: End <-
+[DEBUG] 2020-06-07 10:44:08.050 [main] DBConnection - IMA: DB connection successfully closed
+[DEBUG] 2020-06-07 10:44:08.050 [main] DBConnection - IMA: DB connection opened
+[DEBUG] 2020-06-07 10:44:08.050 [main] DBConnection - countWoAndMeter. Init->
+[DEBUG] 2020-06-07 10:44:08.050 [main] DBConnection - countWoAndMeter. sql: [%s] - params: [%d %ld %s]
+[DEBUG] 2020-06-07 10:44:08.050 [main] DBConnection - countWoAndMeter. Result: [%d] 
+[DEBUG] 2020-06-07 10:44:08.050 [main] DBConnection - countWoAndMeter. End <-
+[DEBUG] 2020-06-07 10:44:08.050 [main] DBConnection - IMA: DB connection successfully closed

@@ -4,9 +4,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ima.dev</groupId>
 	<artifactId>IMA</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>app mvc</name>
+	<name>app ima</name>
 	<description>for unir activity</description>
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
