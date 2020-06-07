@@ -18,7 +18,7 @@ import main.com.ima.dev.service.DBConnection;
  * Servlet implementation class Q2ChangeInstallPointServlet
  */
 
-public class Q2ChangeInstallPointServlet extends HttpServlet {
+public class Q2ChangeInstallPointServlet extends HttpServlet {  
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger =  LogManager.getLogger(Q2ChangeInstallPointServlet.class);
        
