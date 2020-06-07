@@ -60,7 +60,7 @@ public class DBConnection {
 	}
 
 	/**
-	 * Constructor para crear conexión especificando si se quiere autocommit o no.
+	 * Constructor para crear conexion especificando si se quiere autocommit o no.
 	 * 
 	 * @param autoCommitOn boolean
 	 */
