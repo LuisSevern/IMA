@@ -12,6 +12,7 @@ import org.junit.Test;
 import main.java.com.ima.dev.dto.Q2CustomerInfo;
 import main.java.com.ima.dev.service.DBConnection;
 
+
 public class DBConnectionTest {
 	private DBConnection dbconn;
 	private int woPre;
