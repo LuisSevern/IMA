@@ -39,6 +39,7 @@ public class DBConnection {
 	private Connection connection = null;
 	private ResultSet rs = null;
 	private Statement st = null;
+	private boolean autocommitOn;
 	private LoggingSQLCommands sqllog = new LoggingSQLCommands();
 	// connect to websphere datasource
 	InitialContext ctx = null;
@@ -55,6 +56,15 @@ public class DBConnection {
 	private static final Logger logger = LogManager.getLogger(DBConnection.class);
 
 	public DBConnection() {
+		this(true);
+	}
+
+	/**
+	 * Constructor para crear conexión especificando si se quiere autocommit o no.
+	 * 
+	 * @param autoCommitOn boolean
+	 */
+	public DBConnection(boolean autoCommitOn) {
 		try {
 			// This will load the MySQL driver, each DB has its own driver
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
@@ -66,66 +76,12 @@ public class DBConnection {
 			 */
 			connection = DriverManager.getConnection(
 					"jdbc:mysql://[(host=localhost,port=3306,user=luis,password=luis)]/?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC");
+			connection.setAutoCommit(autoCommitOn);
+			this.autocommitOn = autoCommitOn;
+			logger.debug("DBConnection. Connected!");
 
-		} catch (SQLException | ClassNotFoundException e) {
-			System.out.println(e);
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	private void writeResultSet(ResultSet resultSet) throws SQLException {
-		// ResultSet is initially before the first data set
-		while (resultSet.next()) {
-			// It is possible to get the columns via name
-			// also possible to get the columns via the column number
-			// which starts at 1
-			// e.g. resultSet.getSTring(2);
-			String name = resultSet.getString("Name");
-			String countrycode = resultSet.getString("CountryCode");
-			String district = resultSet.getString("District");
-			BigDecimal population = resultSet.getBigDecimal("Population");
-			System.out.println(
-					"name : " + name + " Code: " + countrycode + " district: " + district + " Pop:" + population);
-
-		}
-	}
-
-	private void writeResultSet2(ResultSet resultSet) throws SQLException {
-		// ResultSet is initially before the first data set
-		while (resultSet.next()) {
-			// It is possible to get the columns via name
-			// also possible to get the columns via the column number
-			// which starts at 1
-			// e.g. resultSet.getSTring(2);
-			String name = resultSet.getString("first_name");
-			String countrycode = resultSet.getString("last_name");
-
-			System.out.println("Firstname : " + name + " LastName: " + countrycode);
-
-		}
-	}
-
-	// You need to close the resultSet
-	private void close() {
-		try {
-			if (resultSet != null) {
-				resultSet.close();
-			}
-
-			if (statement != null) {
-				statement.close();
-			}
-
-			if (connect != null) {
-				connect.close();
-			}
-		} catch (Exception e) {
-
+		} catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+			logger.error("DBConnection. Error when connecting", e);
 		}
 	}
 
@@ -163,14 +119,20 @@ public class DBConnection {
 	 * @throws SQLException
 	 * 
 	 */
+	/**
+	 * Cierra la conexión. Si el autocommit no está activado, hace un rollback.
+	 */
 	public void closeConnection() {
 		try {
 			if (this.connection != null) {
+				if (!this.autocommitOn) {
+					this.connection.rollback();
+				}
 				this.connection.close();
-				System.err.println("AMM IE: DB connection closed");
+				logger.debug("closeConnection. connection successfully closed!");
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error("closeConnection. Error when closing", e);
 		}
 	}
 
@@ -982,11 +944,11 @@ public class DBConnection {
 			logger.debug("getRfSerial. sql: [%s] - params: [%s, %d]", sql, value, relationship);
 			st.executeUpdate(sql);
 			st.close();
-			result = true;			
+			result = true;
 		} catch (Exception e) {
 			logger.error("updateRFMeterPort. Exception", e);
 		}
-		logger.debug("updateRFMeterPort. [%s] ", result ? "Successfully Updated!": "No updates carried out");
+		logger.debug("updateRFMeterPort. [%s] ", result ? "Successfully Updated!" : "No updates carried out");
 		logger.debug("updateRFMeterPort: End <-");
 		return result;
 	}
@@ -1007,7 +969,7 @@ public class DBConnection {
 		} catch (Exception e) {
 			logger.error("updateRFMeterPortArgs. Exception", e);
 		}
-		logger.debug("updateRFMeterPortArgs. [%s] ", result ? "Successfully Updated!": "No updates carried out");
+		logger.debug("updateRFMeterPortArgs. [%s] ", result ? "Successfully Updated!" : "No updates carried out");
 		logger.debug("updateRFMeterPortArgs: End <-");
 		return result;
 	}
