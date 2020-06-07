@@ -1,0 +1,71 @@
+[DEBUG] 2020-06-07 10:30:01.683 [main] DBConnection - IMA: DB connection opened
+[DEBUG] 2020-06-07 10:30:01.698 [main] DBConnection - returnCustomerInfo: Init->
+[DEBUG] 2020-06-07 10:30:01.761 [main] DBConnection - returnCustomerInfo. sql: [%s] - params: [%d %ld]
+[DEBUG] 2020-06-07 10:30:01.761 [main] DBConnection - returnCustomerInfo. Results: [%s] 
+[DEBUG] 2020-06-07 10:30:01.761 [main] DBConnection - returnCustomerInfo: End <-
+[DEBUG] 2020-06-07 10:30:16.797 [main] DBConnection - IMA: DB connection successfully closed
+[DEBUG] 2020-06-07 10:34:43.101 [main] DBConnection - IMA: DB connection opened
+[DEBUG] 2020-06-07 10:34:43.115 [main] DBConnection - returnCustomerInfo: Init->
+[DEBUG] 2020-06-07 10:34:43.116 [main] DBConnection - returnCustomerInfo. sql: [%s] - params: [%d %ld]
+[DEBUG] 2020-06-07 10:34:43.132 [main] DBConnection - returnCustomerInfo. Results: [%s] 
+[DEBUG] 2020-06-07 10:34:43.132 [main] DBConnection - returnCustomerInfo: End <-
+[DEBUG] 2020-06-07 10:34:43.132 [main] DBConnection - IMA: DB connection successfully closed
+[DEBUG] 2020-06-07 10:34:43.132 [main] DBConnection - IMA: DB connection opened
+[DEBUG] 2020-06-07 10:34:43.132 [main] DBConnection - countWoAndMeter. Init->
+[DEBUG] 2020-06-07 10:34:43.132 [main] DBConnection - countWoAndMeter. sql: [%s] - params: [%d %ld %s]
+[DEBUG] 2020-06-07 10:34:43.147 [main] DBConnection - countWoAndMeter. Result: [%d] 
+[DEBUG] 2020-06-07 10:34:43.147 [main] DBConnection - countWoAndMeter. End <-
+[DEBUG] 2020-06-07 10:34:43.147 [main] DBConnection - IMA: DB connection successfully closed
+[DEBUG] 2020-06-07 10:35:03.543 [main] DBConnection - IMA: DB connection opened
+[DEBUG] 2020-06-07 10:35:03.554 [main] DBConnection - countWoAndMeter. Init->
+[DEBUG] 2020-06-07 10:35:03.554 [main] DBConnection - countWoAndMeter. sql: [%s] - params: [%d %ld %s]
+[DEBUG] 2020-06-07 10:35:03.570 [main] DBConnection - countWoAndMeter. Result: [%d] 
+[DEBUG] 2020-06-07 10:35:03.570 [main] DBConnection - countWoAndMeter. End <-
+[DEBUG] 2020-06-07 10:43:09.621 [main] DBConnection - IMA: DB connection opened
+[DEBUG] 2020-06-07 10:43:09.629 [main] DBConnection - countWoAndMeter. Init->
+[DEBUG] 2020-06-07 10:43:09.629 [main] DBConnection - countWoAndMeter. sql: [%s] - params: [%d %ld %s]
+[DEBUG] 2020-06-07 10:43:09.645 [main] DBConnection - countWoAndMeter. Result: [%d] 
+[DEBUG] 2020-06-07 10:43:09.645 [main] DBConnection - countWoAndMeter. End <-
+[DEBUG] 2020-06-07 10:43:13.879 [main] DBConnection - IMA: DB connection successfully closed
+[DEBUG] 2020-06-07 10:44:08.024 [main] DBConnection - IMA: DB connection opened
+[DEBUG] 2020-06-07 10:44:08.035 [main] DBConnection - returnCustomerInfo: Init->
+[DEBUG] 2020-06-07 10:44:08.035 [main] DBConnection - returnCustomerInfo. sql: [%s] - params: [%d %ld]
+[DEBUG] 2020-06-07 10:44:08.050 [main] DBConnection - returnCustomerInfo. Results: [%s] 
+[DEBUG] 2020-06-07 10:44:08.050 [main] DBConnection - returnCustomerInfo: End <-
+[DEBUG] 2020-06-07 10:44:08.050 [main] DBConnection - IMA: DB connection successfully closed
+[DEBUG] 2020-06-07 10:44:08.050 [main] DBConnection - IMA: DB connection opened
+[DEBUG] 2020-06-07 10:44:08.050 [main] DBConnection - countWoAndMeter. Init->
+[DEBUG] 2020-06-07 10:44:08.050 [main] DBConnection - countWoAndMeter. sql: [%s] - params: [%d %ld %s]
+[DEBUG] 2020-06-07 10:44:08.050 [main] DBConnection - countWoAndMeter. Result: [%d] 
+[DEBUG] 2020-06-07 10:44:08.050 [main] DBConnection - countWoAndMeter. End <-
+[DEBUG] 2020-06-07 10:44:08.050 [main] DBConnection - IMA: DB connection successfully closed
+[DEBUG] 2020-06-07 21:55:57.982 [main] DBConnection - DBConnection. Connected!
+[DEBUG] 2020-06-07 21:55:58.001 [main] DBConnection - countWoAndMeter. Init->
+[DEBUG] 2020-06-07 21:55:58.008 [main] DBConnection - countWoAndMeter. sql: [%s] - params: [%d %ld %s]
+[DEBUG] 2020-06-07 21:55:58.019 [main] DBConnection - countWoAndMeter. Result: [%d] 
+[DEBUG] 2020-06-07 21:55:58.020 [main] DBConnection - countWoAndMeter. End <-
+[DEBUG] 2020-06-07 21:55:58.021 [main] DBConnection - closeConnection. connection successfully closed!
+[DEBUG] 2020-06-07 21:55:58.030 [main] DBConnection - DBConnection. Connected!
+[DEBUG] 2020-06-07 21:55:58.030 [main] DBConnection - returnCustomerInfo: Init->
+[DEBUG] 2020-06-07 21:55:58.033 [main] DBConnection - returnCustomerInfo. sql: [%s] - params: [%d %ld]
+[DEBUG] 2020-06-07 21:55:58.034 [main] DBConnection - returnCustomerInfo. Results: [%s] 
+[DEBUG] 2020-06-07 21:55:58.034 [main] DBConnection - returnCustomerInfo: End <-
+[DEBUG] 2020-06-07 21:55:58.035 [main] DBConnection - closeConnection. connection successfully closed!
+[DEBUG] 2020-06-07 21:55:58.038 [main] DBConnection - DBConnection. Connected!
+[DEBUG] 2020-06-07 21:55:58.039 [main] DBConnection - closeConnection. connection successfully closed!
+[DEBUG] 2020-06-07 21:55:58.045 [main] DBConnection - DBConnection. Connected!
+[DEBUG] 2020-06-07 21:55:58.046 [main] DBConnection - closeConnection. connection successfully closed!
+[DEBUG] 2020-06-07 21:55:58.049 [main] DBConnection - DBConnection. Connected!
+[DEBUG] 2020-06-07 21:55:58.050 [main] DBConnection - closeConnection. connection successfully closed!
+[DEBUG] 2020-06-07 21:55:58.053 [main] DBConnection - DBConnection. Connected!
+[DEBUG] 2020-06-07 21:55:58.054 [main] DBConnection - closeConnection. connection successfully closed!
+[DEBUG] 2020-06-07 21:55:58.057 [main] DBConnection - DBConnection. Connected!
+[DEBUG] 2020-06-07 21:55:58.058 [main] DBConnection - closeConnection. connection successfully closed!
+[DEBUG] 2020-06-07 21:55:58.062 [main] DBConnection - DBConnection. Connected!
+[DEBUG] 2020-06-07 21:55:58.062 [main] DBConnection - closeConnection. connection successfully closed!
+[DEBUG] 2020-06-07 21:55:58.066 [main] DBConnection - DBConnection. Connected!
+[DEBUG] 2020-06-07 21:55:58.067 [main] DBConnection - closeConnection. connection successfully closed!
+[DEBUG] 2020-06-07 21:55:58.069 [main] DBConnection - DBConnection. Connected!
+[DEBUG] 2020-06-07 21:55:58.070 [main] DBConnection - closeConnection. connection successfully closed!
+[DEBUG] 2020-06-07 21:55:58.073 [main] DBConnection - DBConnection. Connected!
+[DEBUG] 2020-06-07 21:55:58.073 [main] DBConnection - closeConnection. connection successfully closed!

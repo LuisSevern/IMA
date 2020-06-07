@@ -57,10 +57,10 @@
 	<div class="context">
 		<br>
 
-<jsp:useBean id="customerInfo" class="main.com.ima.dev.dto.Q6MWCustomerInfo" scope="request">
+<jsp:useBean id="customerInfo" class="main.java.com.ima.dev.dto.Q6MWCustomerInfo" scope="request">
 </jsp:useBean>
 
-<jsp:useBean id="customerInfo2" class="main.com.ima.dev.dto.Q6MWCustomerInfo" scope="request">
+<jsp:useBean id="customerInfo2" class="main.java.com.ima.dev.dto.Q6MWCustomerInfo" scope="request">
 </jsp:useBean>
 
 	<form action="Q6UpdateInstallPointWaterServlet" method="get">

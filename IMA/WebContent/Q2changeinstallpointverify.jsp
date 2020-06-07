@@ -14,11 +14,11 @@
 </head>
 <body>
 
-	<jsp:useBean id="customerInfo" class="main.com.ima.dev.dto.Q2CustomerInfo"
+	<jsp:useBean id="customerInfo" class="main.java.com.ima.dev.dto.Q2CustomerInfo"
 		scope="request">
 	</jsp:useBean>
 
-	<jsp:useBean id="customerInfo2" class="main.com.ima.dev.dto.Q2CustomerInfo"
+	<jsp:useBean id="customerInfo2" class="main.java.com.ima.dev.dto.Q2CustomerInfo"
 		scope="request">
 	</jsp:useBean>
 
