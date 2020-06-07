@@ -94,7 +94,7 @@ function check() {
 	<div class="context">
 		<br>
 
-		<jsp:useBean id="customerInfo" class="main.com.ima.dev.dto.Q3CustomerInfo"
+		<jsp:useBean id="customerInfo" class="main.java.com.ima.dev.dto.Q3CustomerInfo"
 			scope="request">
 		</jsp:useBean>
 

@@ -19,7 +19,7 @@
 	<div class="context">
 		<br>
 
-<jsp:useBean id="device" class="main.com.ima.dev.dto.Q9DeviceInfo" scope="request">
+<jsp:useBean id="device" class="main.java.com.ima.dev.dto.Q9DeviceInfo" scope="request">
 </jsp:useBean>
 
 	<form action="Q9RetrieveWorkOrderServlet" method="get">

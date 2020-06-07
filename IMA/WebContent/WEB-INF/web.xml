@@ -10,7 +10,7 @@
   </welcome-file-list>
   <servlet>
     <servlet-name>Q1ChangeInstallPointServlet</servlet-name>
-    <servlet-class>main.com.ima.dev.Q1ChangeInstallPointServlet</servlet-class>
+    <servlet-class>main.java.com.ima.dev.Q1ChangeInstallPointServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Q1ChangeInstallPointServlet</servlet-name>
@@ -18,7 +18,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>Q1PremiseDetailsServlet</servlet-name>
-    <servlet-class>main.com.ima.dev.Q1PremiseDetailsServlet</servlet-class>
+    <servlet-class>main.java.com.ima.dev.Q1PremiseDetailsServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Q1PremiseDetailsServlet</servlet-name>
@@ -26,7 +26,7 @@
   </servlet-mapping> 
   <servlet>
     <servlet-name>Q2ChangeInstallPointServlet</servlet-name>
-    <servlet-class>main.com.ima.dev.Q2ChangeInstallPointServlet</servlet-class>
+    <servlet-class>main.java.com.ima.dev.Q2ChangeInstallPointServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Q2ChangeInstallPointServlet</servlet-name>
@@ -34,7 +34,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>Q2UpdateInstallPointServlet</servlet-name>
-    <servlet-class>main.com.ima.dev.Q2UpdateInstallPointServlet</servlet-class>
+    <servlet-class>main.java.com.ima.dev.Q2UpdateInstallPointServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Q2UpdateInstallPointServlet</servlet-name>
@@ -42,7 +42,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>Q3ChangeWaterMeterType</servlet-name>
-    <servlet-class>main.com.ima.dev.Q3ChangeWaterMeterTypeServlet</servlet-class>
+    <servlet-class>main.java.com.ima.dev.Q3ChangeWaterMeterTypeServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Q3ChangeWaterMeterType</servlet-name>
@@ -50,7 +50,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>Q3UpdateMiuModuleTypeServlet</servlet-name>
-    <servlet-class>main.com.ima.dev.Q3UpdateMiuModuleTypeServlet</servlet-class>
+    <servlet-class>main.java.com.ima.dev.Q3UpdateMiuModuleTypeServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Q3UpdateMiuModuleTypeServlet</servlet-name>
@@ -58,7 +58,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>Q3UpdateWaterMeterType</servlet-name>
-    <servlet-class>main.com.ima.dev.Q3UpdateWaterMeterType</servlet-class>
+    <servlet-class>main.java.com.ima.dev.Q3UpdateWaterMeterType</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Q3UpdateWaterMeterType</servlet-name>
@@ -66,7 +66,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>Q4ChangeWaterMIUMeterServlet</servlet-name>
-    <servlet-class>main.com.ima.dev.Q4ChangeWaterMIUMeterServlet</servlet-class>
+    <servlet-class>main.java.com.ima.dev.Q4ChangeWaterMIUMeterServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Q4ChangeWaterMIUMeterServlet</servlet-name>
@@ -74,7 +74,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>Q4UpdateMeterModuleServlet</servlet-name>
-    <servlet-class>main.com.ima.dev.Q4UpdateMeterModuleServlet</servlet-class>
+    <servlet-class>main.java.com.ima.dev.Q4UpdateMeterModuleServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Q4UpdateMeterModuleServlet</servlet-name>
@@ -82,7 +82,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>Q4UpdateMiuModuleServlet</servlet-name>
-    <servlet-class>main.com.ima.dev.Q4UpdateMiuModuleServlet</servlet-class>
+    <servlet-class>main.java.com.ima.dev.Q4UpdateMiuModuleServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Q4UpdateMiuModuleServlet</servlet-name>
@@ -90,7 +90,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>Q5UpdateMiuMeterRelationServlet</servlet-name>
-    <servlet-class>main.com.ima.dev.Q5UpdateMiuMeterRelationServlet</servlet-class>
+    <servlet-class>main.java.com.ima.dev.Q5UpdateMiuMeterRelationServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Q5UpdateMiuMeterRelationServlet</servlet-name>
@@ -98,7 +98,7 @@
   </servlet-mapping>
  <servlet>
     <servlet-name>Q5ViewMiuMeterRelationServlet</servlet-name>
-    <servlet-class>main.com.ima.dev.Q5ViewMiuMeterRelationServlet</servlet-class>
+    <servlet-class>main.java.com.ima.dev.Q5ViewMiuMeterRelationServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Q5ViewMiuMeterRelationServlet</servlet-name>
@@ -106,7 +106,7 @@
   </servlet-mapping> 
   <servlet>
     <servlet-name>Q6ChangeInstallPointWaterServlet</servlet-name>
-    <servlet-class>main.com.ima.dev.Q6ChangeInstallPointWaterServlet</servlet-class>
+    <servlet-class>main.java.com.ima.dev.Q6ChangeInstallPointWaterServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Q6ChangeInstallPointWaterServlet</servlet-name>
@@ -114,7 +114,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>Q6UpdateInstallPointWaterServlet</servlet-name>
-    <servlet-class>main.com.ima.dev.Q6UpdateInstallPointWaterServlet</servlet-class>
+    <servlet-class>main.java.com.ima.dev.Q6UpdateInstallPointWaterServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Q6UpdateInstallPointWaterServlet</servlet-name>
@@ -123,7 +123,7 @@
 
   <servlet>
     <servlet-name>Q7WaterDetailsByWorkOrderServlet</servlet-name>
-    <servlet-class>main.com.ima.dev.Q7WaterDetailsByWorkOrderServlet</servlet-class>
+    <servlet-class>main.java.com.ima.dev.Q7WaterDetailsByWorkOrderServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Q7WaterDetailsByWorkOrderServlet</servlet-name>
@@ -132,21 +132,21 @@
   
   <servlet>
   	<servlet-name>Q7UpdateMIUMeterRelationServlet</servlet-name>
-  	<servlet-class>main.com.ima.dev.Q7UpdateMIUMeterRelationServlet</servlet-class>
+  	<servlet-class>main.java.com.ima.dev.Q7UpdateMIUMeterRelationServlet</servlet-class>
   </servlet>
   <servlet>
   	<description>
   	</description>
   	<display-name>Q8ChangeInstallPointSingleServlet</display-name>
   	<servlet-name>Q8ChangeInstallPointSingleServlet</servlet-name>
-  	<servlet-class>main.com.ima.dev.Q8ChangeInstallPointSingleServlet</servlet-class>
+  	<servlet-class>main.java.com.ima.dev.Q8ChangeInstallPointSingleServlet</servlet-class>
   </servlet>
   <servlet>
   	<description>
   	</description>
   	<display-name>Q8UpdateInstallPointSingleServlet</display-name>
   	<servlet-name>Q8UpdateInstallPointSingleServlet</servlet-name>
-  	<servlet-class>main.com.ima.dev.Q8UpdateInstallPointSingleServlet</servlet-class>
+  	<servlet-class>main.java.com.ima.dev.Q8UpdateInstallPointSingleServlet</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>Q7UpdateMIUMeterRelationServlet</servlet-name>
@@ -162,7 +162,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>checkCredentialServlet</servlet-name>
-    <servlet-class>main.com.ima.dev.checkCredentialServlet</servlet-class>
+    <servlet-class>main.java.com.ima.dev.checkCredentialServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>checkCredentialServlet</servlet-name>
@@ -171,7 +171,7 @@
   
   <servlet>
   	<servlet-name>Q9RetrieveWorkOrderServlet</servlet-name>
-  	<servlet-class>main.com.ima.dev.Q9RetrieveWorkOrderServlet</servlet-class>
+  	<servlet-class>main.java.com.ima.dev.Q9RetrieveWorkOrderServlet</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>Q9RetrieveWorkOrderServlet</servlet-name>

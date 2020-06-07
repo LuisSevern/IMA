@@ -61,11 +61,11 @@
 	<div class="context">
 		<br>
 
-		<jsp:useBean id="premiseInfo" class="main.com.ima.dev.dto.Q1Premise"
+		<jsp:useBean id="premiseInfo" class="main.java.com.ima.dev.dto.Q1Premise"
 			scope="request">
 		</jsp:useBean>
 
-		<jsp:useBean id="premiseInfo2" class="main.com.ima.dev.dto.Q1Premise"
+		<jsp:useBean id="premiseInfo2" class="main.java.com.ima.dev.dto.Q1Premise"
 			scope="request">
 		</jsp:useBean>
 

@@ -58,10 +58,10 @@
 	<div class="context">
 		<br>
 
-<jsp:useBean id="woInfo" class="main.com.ima.dev.dto.Q7SwapModule" scope="request">
+<jsp:useBean id="woInfo" class="main.java.com.ima.dev.dto.Q7SwapModule" scope="request">
 </jsp:useBean>
 
-<jsp:useBean id="woInfo2" class="main.com.ima.dev.dto.Q7SwapModule" scope="request">
+<jsp:useBean id="woInfo2" class="main.java.com.ima.dev.dto.Q7SwapModule" scope="request">
 </jsp:useBean>
 <form action="Q7UpdateMIUMeterRelationServlet" method="get">
 	<table border="1" width="1024px">
