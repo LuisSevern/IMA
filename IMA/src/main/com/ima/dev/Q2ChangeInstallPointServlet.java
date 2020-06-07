@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import main.com.ima.dev.dto.LoggingPath;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import main.com.ima.dev.dto.Q2CustomerInfo;
 import main.com.ima.dev.service.DBConnection;
 
@@ -18,22 +20,20 @@ import main.com.ima.dev.service.DBConnection;
 
 public class Q2ChangeInstallPointServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final Logger logger =  LogManager.getLogger(Q2ChangeInstallPointServlet.class);
        
     /**
      * @see HttpServlet#HttpServlet()
      */
     public Q2ChangeInstallPointServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//System.out.println("Hello from get method");
-		//Logging test
-		LoggingPath.setLpath(getServletContext().getRealPath("/logs/logs.txt"));
+		logger.info("Chagen Install Point. Init ->");
 		RequestDispatcher dispatcher = null;
 		long usedWoRefNumber = 0, actualWoRefNumber = 0;
 		String usedWoID = "";
@@ -93,7 +93,7 @@ public class Q2ChangeInstallPointServlet extends HttpServlet {
 		String meterSN = request.getParameter("meterSN");
 
 		try {		
-			DBConnection dbconn = new DBConnection();
+			DBConnection dbconn = new DBConnection();			
 			int resultQry1 = dbconn.countWoAndMeter(usedWoRefPrefix, usedWoRefNumber, meterSN);
 			int resultQry2 = dbconn.checkWoExistsAPDAElectricity(actualWoRefPrefix, actualWoRefNumber);
 			//we have to save the install point somewhere
@@ -122,16 +122,15 @@ public class Q2ChangeInstallPointServlet extends HttpServlet {
 			}
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Change Install Point. Gathering  Data", e);
 		}
+		logger.info("Change Install Point. End <-");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
 
 }
