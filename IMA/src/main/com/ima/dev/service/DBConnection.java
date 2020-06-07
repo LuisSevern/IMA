@@ -37,14 +37,15 @@ import main.com.ima.dev.dto.Q9DeviceInfo;
 public class DBConnection {
 
 	private Connection connection = null;
-	private boolean autocommitOn = false;
 	private ResultSet rs = null;
 	private Statement st = null;
+	private boolean autocommitOn;
 	private LoggingSQLCommands sqllog = new LoggingSQLCommands();
 	// connect to websphere datasource
 	InitialContext ctx = null;
 	DataSource dataSource = null;
 
+	private Connection connect = null;
 	private Statement statement = null;
 	private PreparedStatement preparedStatement = null;
 	private ResultSet resultSet = null;
@@ -59,26 +60,67 @@ public class DBConnection {
 	}
 
 	/**
-	 * Constructor for setting autocommit property.
-	 * @param autocommit 
+	 * Constructor para crear conexión especificando si se quiere autocommit o no.
+	 * 
+	 * @param autoCommitOn boolean
 	 */
-	public DBConnection(boolean autocommit) {
+	public DBConnection(boolean autoCommitOn) {
 		try {
 			// This will load the MySQL driver, each DB has its own driver
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 
+			// Setup the connection with the DB
+			/*
+			 * connect = DriverManager .getConnection("jdbc:mysql://" + host + "/world?" +
+			 * "user=" + user + "&password=" + passwd );
+			 */
 			connection = DriverManager.getConnection(
 					"jdbc:mysql://[(host=localhost,port=3306,user=luis,password=luis)]/?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC");
-			connection.setAutoCommit(autocommit);
-			this.autocommitOn = autocommit;
-			logger.debug("IMA: DB connection opened");
+			connection.setAutoCommit(autoCommitOn);
+			this.autocommitOn = autoCommitOn;
+			logger.debug("DBConnection. Connected!");
+
 		} catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-			logger.error("IMA: DB connection error. ", e);
+			logger.error("DBConnection. Error when connecting", e);
 		}
 	}
-	
+
+	// Accessing to DB through the Datasource defined in server
+	/*
+	 * public DBConnection(){
+	 * 
+	 * // Production try { String ds = "java:comp/env/jdbc/db"; InitialContext
+	 * context = new InitialContext(); this.dataSource =
+	 * (DataSource)context.lookup(ds); if (this.dataSource != null){ connection =
+	 * this.dataSource.getConnection(); } } catch (NamingException e) {
+	 * System.out.println("Exception in the context creation: 1"); } catch
+	 * (SQLException e){ System.out.println("Exception in the context creation: 2");
+	 * } } / // Error Control in AMM IE. End
+	 * 
+	 * public String testDataBase () { String value = ""; String serialNumberMeter =
+	 * "09I9M5N2102800026"; String sql =
+	 * "select neuronid from rmm.ce where serialnumber = '" + serialNumberMeter +
+	 * "'";
+	 * 
+	 * try { st = connection.createStatement(); if (st == null){
+	 * System.err.println("THERE IS NOT ST"); } else {
+	 * System.err.println("THERE IS ST"); } rs = st.executeQuery(sql);
+	 * System.err.println("AFTER TO PERFORMING THE QUERY"); while (rs.next()){ value
+	 * = rs.getString("neuronid");
+	 * System.out.println("The retrieved value has been: " + value); } rs.close();
+	 * st.close(); } catch (SQLException e) { e.printStackTrace(); value = "Error";
+	 * }
+	 * 
+	 * return value; }
+	 * 
+	 * // Error Control in AMM IE. Begin // Closing the DB connection /** Method to
+	 * closing the connection
+	 * 
+	 * @throws SQLException
+	 * 
+	 */
 	/**
-	 * closing connection
+	 * Cierra la conexión. Si el autocommit no está activado, hace un rollback.
 	 */
 	public void closeConnection() {
 		try {
@@ -87,10 +129,10 @@ public class DBConnection {
 					this.connection.rollback();
 				}
 				this.connection.close();
-				logger.debug("IMA: DB connection successfully closed");
+				logger.debug("closeConnection. connection successfully closed!");
 			}
 		} catch (SQLException e) {
-			logger.error("IMA: Error when closing",e);
+			logger.error("closeConnection. Error when closing", e);
 		}
 	}
 
@@ -902,11 +944,11 @@ public class DBConnection {
 			logger.debug("getRfSerial. sql: [%s] - params: [%s, %d]", sql, value, relationship);
 			st.executeUpdate(sql);
 			st.close();
-			result = true;			
+			result = true;
 		} catch (Exception e) {
 			logger.error("updateRFMeterPort. Exception", e);
 		}
-		logger.debug("updateRFMeterPort. [%s] ", result ? "Successfully Updated!": "No updates carried out");
+		logger.debug("updateRFMeterPort. [%s] ", result ? "Successfully Updated!" : "No updates carried out");
 		logger.debug("updateRFMeterPort: End <-");
 		return result;
 	}
@@ -927,7 +969,7 @@ public class DBConnection {
 		} catch (Exception e) {
 			logger.error("updateRFMeterPortArgs. Exception", e);
 		}
-		logger.debug("updateRFMeterPortArgs. [%s] ", result ? "Successfully Updated!": "No updates carried out");
+		logger.debug("updateRFMeterPortArgs. [%s] ", result ? "Successfully Updated!" : "No updates carried out");
 		logger.debug("updateRFMeterPortArgs: End <-");
 		return result;
 	}
@@ -1585,12 +1627,5 @@ public class DBConnection {
 			System.out.println("Exception is :" + e);
 		}
 		return result;
-	}
-
-	/**
-	 * @return the connection
-	 */
-	public Connection getConnection() {
-		return connection;
 	}
 }
