@@ -42,7 +42,6 @@ public class DBConnectionTest {
 
 	@Test
 	public void testCountWoAndMeter() {
-		
 		woPre = 1;
 		woNo = 105991001;
 		/*
