@@ -44,9 +44,9 @@ public class DBConnectionTest {
 	public void testCountWoAndMeter() {
 		woPre = 1;
 		woNo = 105991001;
-		/*
+		
 		serialNumber = "02456789QYF";
-		int count = dbconn.countWoAndMeter(woPre, woNo, serialNumber);
+		/*int count = dbconn.countWoAndMeter(woPre, woNo, serialNumber);
 		assertTrue(count > 0);
 		*/
 	}
