@@ -20,12 +20,12 @@ public class DBConnectionTest {
 
 	@Before
 	public void openConnectionRollback() {
-		//this.dbconn = new DBConnection(false);
+		this.dbconn = new DBConnection(false);
 	}
 
 	@After
 	public void closeConnection() {
-	//	this.dbconn.closeConnection();
+		this.dbconn.closeConnection();
 	}
 
 	@Test
