@@ -108,7 +108,7 @@ public class DBConnection {
 			 * "user=" + user + "&password=" + passwd );
 			 */
 			url= System.getenv("IMA_DB_URL");
-			logger.error("Variable de entorno" + url);
+			logger.error("Variable de entorno " + url);
 			if (url == null || url.isEmpty()) {
 				System.out.println("Variable de entorno" + url);
 				logger.error("DBConnection. Error when gettig connection url");
