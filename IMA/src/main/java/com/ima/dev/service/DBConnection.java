@@ -71,9 +71,9 @@ public class DBConnection {
 			String url= System.getenv("IMA_DB_URL");
 			logger.error("Variable de entorno" + url);
 			System.out.println("Variable de entorno" + url);
-			if (url==null || url.isEmpty()) {
+			/*if (url==null || url.isEmpty()) {
 				url = prop.getProperty("db.url")!=null?prop.getProperty("db.url"):"localhost";
-			}
+			}*/
 			String user = prop.getProperty("db.user");
 			String pass = prop.getProperty("db.password");
 			salida.append("jdbc:mysql://[(host=").append(url).append(",port=3306,user=").append(user)
@@ -107,9 +107,9 @@ public class DBConnection {
 			 * connect = DriverManager .getConnection("jdbc:mysql://" + host + "/world?" +
 			 * "user=" + user + "&password=" + passwd );
 			 */
+			url= System.getenv("IMA_DB_URL");
+			logger.error("Variable de entorno" + url);
 			if (url == null || url.isEmpty()) {
-				url= System.getenv("IMA_DB_URL");
-				logger.error("Variable de entorno" + url);
 				System.out.println("Variable de entorno" + url);
 				logger.error("DBConnection. Error when gettig connection url");
 				throw new Exception("DBConnection. Error when gettig connection url.");
