@@ -69,8 +69,7 @@ public class DBConnection {
 			// load a properties file
 			prop.load(input);
 			String url= System.getenv("IMA_DB_URL");
-			logger.error("Variable de entorno" + url);
-			System.out.println("Variable de entorno" + url);
+			System.out.println("Variable de entorno static " + url);
 			/*if (url==null || url.isEmpty()) {
 				url = prop.getProperty("db.url")!=null?prop.getProperty("db.url"):"localhost";
 			}*/
