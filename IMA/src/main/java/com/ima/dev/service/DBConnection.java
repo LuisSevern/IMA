@@ -64,15 +64,17 @@ public class DBConnection {
 		StringBuilder salida = new StringBuilder();
 		
 		
-		try (InputStream input = DBConnection.class.getClassLoader().getResourceAsStream("jdbc.properties")){
+		try (
+			InputStream input = DBConnection.class.getClassLoader().getResourceAsStream("jdbc.properties")){
 			Properties prop = new Properties();
 			// load a properties file
 			prop.load(input);
 			String url= System.getenv("IMA_DB_URL");
-			System.out.println("Variable de entorno static " + url);
-			/*if (url==null || url.isEmpty()) {
+			
+			if (url==null || url.isEmpty()) {
 				url = prop.getProperty("db.url")!=null?prop.getProperty("db.url"):"localhost";
-			}*/
+				System.out.println("Variable de entorno static " + url);
+			}
 			String user = prop.getProperty("db.user");
 			String pass = prop.getProperty("db.password");
 			salida.append("jdbc:mysql://[(host=").append(url).append(",port=3306,user=").append(user)
@@ -81,6 +83,7 @@ public class DBConnection {
 
 		} catch (IOException ex) {
 			logger.error("Error al obtener cadena de conexión de bbdd.");
+			System.out.println("IO" + ex);
 		}
 
 		url = salida.toString();
@@ -105,9 +108,7 @@ public class DBConnection {
 			/*
 			 * connect = DriverManager .getConnection("jdbc:mysql://" + host + "/world?" +
 			 * "user=" + user + "&password=" + passwd );
-			 */
-			url= System.getenv("IMA_DB_URL");
-			logger.error("Variable de entorno " + url);
+			 */			
 			if (url == null || url.isEmpty()) {
 				System.out.println("Variable de entorno" + url);
 				logger.error("DBConnection. Error when gettig connection url");
