@@ -179,14 +179,12 @@
   </servlet-mapping>
   
   
-    
-<resource-ref>
-	<description>Resource reference to my database</description>
-	<res-ref-name>jdbc/db</res-ref-name>
-	<res-type>javax.sql.DataSource</res-type>
-	<res-auth>Container</res-auth>
-	<res-sharing-scope>Shareable</res-sharing-scope>
-</resource-ref>
+ <resource-ref>
+    <res-ref-name>jdbc/MySQLDataSource</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+    <res-sharing-scope>Shareable</res-sharing-scope>              
+  </resource-ref>
 
 <env-entry>
 	<description>Type of authentication</description>

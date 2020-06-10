@@ -42,9 +42,9 @@ public class Q4UpdateMiuModuleServlet extends HttpServlet {
 				long WOID = Long.parseLong(request.getParameter("hiddenWoID"));
 				//fix02
 				String workOrderID = request.getParameter("hiddenworkorderid");
-				DBConnection dbconn = new DBConnection();
+				
 				try {
-					 
+					DBConnection dbconn = new DBConnection();
 					int miuExists = dbconn.countExistingMeter(changedMIUSerial);
 					if ( miuExists!=0) { //CQ 4647.
 						// error page here
@@ -80,8 +80,7 @@ public class Q4UpdateMiuModuleServlet extends HttpServlet {
 					}
 				} catch (Exception e) {
 					// error page here
-					request.setAttribute("result", "Database: Error updating meter. ");
-					dbconn.closeConnection();
+					request.setAttribute("result", "Database: Error updating meter. ");					
 					RequestDispatcher dispatcher = request.getRequestDispatcher("error.jsp");
 					dispatcher.forward(request, response);
 				} 
