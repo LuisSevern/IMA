@@ -1,6 +1,9 @@
 package main.java.com.ima.dev.service;
 
-import java.math.BigDecimal;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.AccessDeniedException;
 
 //import java.io.*;
 //import java.sql.Connection;
@@ -19,6 +22,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
@@ -55,7 +59,35 @@ public class DBConnection {
 	final private String passwd = "developer";
 	private static final Logger logger = LogManager.getLogger(DBConnection.class);
 
-	public DBConnection() {
+	private static String url;
+	static {
+		StringBuilder salida = new StringBuilder();
+		
+		
+		try (InputStream input = DBConnection.class.getClassLoader().getResourceAsStream("jdbc.properties")){
+			Properties prop = new Properties();
+			// load a properties file
+			prop.load(input);
+			String url= System.getenv("IMA_DB_URL");
+			logger.error("Variable de entorno" + url);
+			System.out.println("Variable de entorno" + url);
+			if (url==null || url.isEmpty()) {
+				url = prop.getProperty("db.url")!=null?prop.getProperty("db.url"):"localhost";
+			}
+			String user = prop.getProperty("db.user");
+			String pass = prop.getProperty("db.password");
+			salida.append("jdbc:mysql://[(host=").append(url).append(",port=3306,user=").append(user)
+					.append(",password=").append(pass)
+					.append(")]/?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC");
+
+		} catch (IOException ex) {
+			logger.error("Error al obtener cadena de conexión de bbdd.");
+		}
+
+		url = salida.toString();
+	}
+
+	public DBConnection() throws Exception {
 		this(true);
 	}
 
@@ -63,8 +95,9 @@ public class DBConnection {
 	 * Constructor para crear conexion especificando si se quiere autocommit o no.
 	 * 
 	 * @param autoCommitOn boolean
+	 * @throws Exception 
 	 */
-	public DBConnection(boolean autoCommitOn) {
+	public DBConnection(boolean autoCommitOn) throws Exception {
 		try {
 			// This will load the MySQL driver, each DB has its own driver
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
@@ -74,8 +107,15 @@ public class DBConnection {
 			 * connect = DriverManager .getConnection("jdbc:mysql://" + host + "/world?" +
 			 * "user=" + user + "&password=" + passwd );
 			 */
-			connection = DriverManager.getConnection(
-					"jdbc:mysql://[(host=localhost,port=3306,user=luis,password=luis)]/?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC");
+			if (url == null || url.isEmpty()) {
+				url= System.getenv("IMA_DB_URL");
+				logger.error("Variable de entorno" + url);
+				System.out.println("Variable de entorno" + url);
+				logger.error("DBConnection. Error when gettig connection url");
+				throw new Exception("DBConnection. Error when gettig connection url.");
+			}
+			connection = DriverManager.getConnection(url);
+			// "jdbc:mysql://[(host=localhost,port=3306,user=luis,password=luis)]/?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC");
 			connection.setAutoCommit(autoCommitOn);
 			this.autocommitOn = autoCommitOn;
 			logger.debug("DBConnection. Connected!");
@@ -220,7 +260,7 @@ public class DBConnection {
 		logger.debug("returnCustomerInfo: Init->");
 		Q2CustomerInfo customerInfo = new Q2CustomerInfo();
 		try {
-			String sql = "select bip.ID, bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, concat((CASE wo.REFERENCEPREFIX WHEN 1 THEN 'EXT' when 3 then 'DUP' ELSE 'PDA' END), CHAR(wo.REFERENCENUMBER)) AS WORK_ORDER_ID, bpe.FIRSTNAME, bpe.LASTNAME from BAM.INSTALL_POINT bip, BAM.INSTALL_PLACE bipl, BAM.ADDRESS bad, WOP.WORK_ORDER wo , BAM.PERSON bpe where bip.installplace = bipl.id and bipl.address =  bad.id and bipl.contact = bpe.id and wo.placeid = bipl.placeid and wo.REFERENCEPREFIX = "
+	/*		String sql = "select bip.ID, bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, concat((CASE wo.REFERENCEPREFIX WHEN 1 THEN 'EXT' when 3 then 'DUP' ELSE 'PDA' END), CHAR(wo.REFERENCENUMBER)) AS WORK_ORDER_ID, bpe.FIRSTNAME, bpe.LASTNAME from BAM.INSTALL_POINT bip, BAM.INSTALL_PLACE bipl, BAM.ADDRESS bad, WOP.WORK_ORDER wo , BAM.PERSON bpe where bip.installplace = bipl.id and bipl.address =  bad.id and bipl.contact = bpe.id and wo.placeid = bipl.placeid and wo.REFERENCEPREFIX = "
 					+ woPre + " and wo.REFERENCENUMBER =" + woNo;
 			st = connection.createStatement();
 			rs = st.executeQuery(sql);
@@ -234,6 +274,23 @@ public class DBConnection {
 				customerInfo.setPremiseStreet(rs.getString("STREET"));
 				customerInfo.setWorkOrderID(rs.getString("WORK_ORDER_ID"));
 				customerInfo.setInstallPoint(rs.getInt("ID"));
+			}
+			logger.debug("returnCustomerInfo. Results: [%s] ", customerInfo.toString());
+			st.close();
+			rs.close();
+			*/
+			String sql = "select bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, bpe.FIRSTNAME, bpe.LASTNAME from BAM.ADDRESS bad, BAM.PERSON bpe "
+					;
+			st = connection.createStatement();
+			rs = st.executeQuery(sql);
+			logger.debug("returnCustomerInfo. sql: [%s] - params: [%d %ld]", sql, woPre, woNo);
+			while (rs.next()) {
+				customerInfo.setCustomerFirstName(rs.getString("FIRSTNAME"));
+				customerInfo.setCustomerLastName(rs.getString("LASTNAME"));
+				customerInfo.setPremiseCity(rs.getString("CITY"));
+				customerInfo.setPremiseHouseName(rs.getString("HOUSENAME"));
+				customerInfo.setPremiseNumber(rs.getString("NUMBER"));
+				customerInfo.setPremiseStreet(rs.getString("STREET"));
 			}
 			logger.debug("returnCustomerInfo. Results: [%s] ", customerInfo.toString());
 			st.close();
