@@ -195,7 +195,7 @@ public class DBConnection {
 		Q1Premise premiseInfo = new Q1Premise();
 		System.err.println("AMM IE: returnPremiseInfo(" + woPre + ", " + woNo + ", " + meterSN + "). Init");
 		try {
-			String sql = "select bat.ID AS ASSETID, bat.TYPENAME, bat.SERIAL, bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, concat(DECODE(wo.REFERENCEPREFIX, 1, 'EXT',3,'DUP','PDA'), CHAR(wo.REFERENCENUMBER)) AS WORK_ORDER_ID, wo.LASTUPDATEDATE, bpe.FIRSTNAME, bpe.LASTNAME from BAM.ASSET bat, BAM.INSTALL_POINT bip, BAM.INSTALL_PLACE bipl, BAM.ADDRESS bad, WOP.WORK_ORDER wo , BAM.PERSON bpe where bat.installpoint = bip.id and bip.installplace = bipl.id and bipl.address =  bad.id and bipl.contact = bpe.id and wo.placeid = bipl.placeid and wo.REFERENCEPREFIX = "
+			String sql = "select bat.ID AS ASSETID, bat.TYPENAME, bat.SERIAL, bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, concat(DECODE(wo.REFERENCEPREFIX, 1, 'EXT',3,'DUP','PDA'), CHAR(wo.REFERENCENUMBER)) AS WORK_ORDER_ID, wo.LASTUPDATEDATE, bpe.FIRSTNAME, bpe.LASTNAME from bam.ASSET bat, bam.INSTALL_POINT bip, bam.INSTALL_PLACE bipl, bam.ADDRESS bad, WOP.WORK_ORDER wo , bam.PERSON bpe where bat.installpoint = bip.id and bip.installplace = bipl.id and bipl.address =  bad.id and bipl.contact = bpe.id and wo.placeid = bipl.placeid and wo.REFERENCEPREFIX = "
 					+ woPre + " and wo.REFERENCENUMBER = " + woNo + " and bat.SERIAL = '" + meterSN
 					+ "' and bip.NETWORK = 0";
 			st = connection.createStatement();
@@ -231,9 +231,9 @@ public class DBConnection {
 		CallableStatement cs = null;
 		try {
 			System.err.println("AMM IE: changeInstallPoint(). Init");
-			String sql = "CALL BAM.SWAPINSTALLPOINT(" + installPoint1 + "," + installPoint2 + "," + serialNumber1 + ","
+			String sql = "CALL bam.SWAPINSTALLPOINT(" + installPoint1 + "," + installPoint2 + "," + serialNumber1 + ","
 					+ workOrderRef1 + "," + serialNumber2 + "," + workOrderRef2 + ")";
-			cs = connection.prepareCall("CALL BAM.SWAPINSTALLPOINT(?,?,?,?,?,?)");
+			cs = connection.prepareCall("CALL bam.SWAPINSTALLPOINT(?,?,?,?,?,?)");
 			// cs.registerOutParameter(1, Types.INTEGER);
 			cs.setInt(1, installPoint1);
 			cs.setInt(2, installPoint2);
@@ -260,7 +260,7 @@ public class DBConnection {
 		logger.debug("returnCustomerInfo: Init->");
 		Q2CustomerInfo customerInfo = new Q2CustomerInfo();
 		try {
-	/*		String sql = "select bip.ID, bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, concat((CASE wo.REFERENCEPREFIX WHEN 1 THEN 'EXT' when 3 then 'DUP' ELSE 'PDA' END), CHAR(wo.REFERENCENUMBER)) AS WORK_ORDER_ID, bpe.FIRSTNAME, bpe.LASTNAME from BAM.INSTALL_POINT bip, BAM.INSTALL_PLACE bipl, BAM.ADDRESS bad, WOP.WORK_ORDER wo , BAM.PERSON bpe where bip.installplace = bipl.id and bipl.address =  bad.id and bipl.contact = bpe.id and wo.placeid = bipl.placeid and wo.REFERENCEPREFIX = "
+	/*		String sql = "select bip.ID, bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, concat((CASE wo.REFERENCEPREFIX WHEN 1 THEN 'EXT' when 3 then 'DUP' ELSE 'PDA' END), CHAR(wo.REFERENCENUMBER)) AS WORK_ORDER_ID, bpe.FIRSTNAME, bpe.LASTNAME from bam.INSTALL_POINT bip, bam.INSTALL_PLACE bipl, bam.ADDRESS bad, WOP.WORK_ORDER wo , bam.PERSON bpe where bip.installplace = bipl.id and bipl.address =  bad.id and bipl.contact = bpe.id and wo.placeid = bipl.placeid and wo.REFERENCEPREFIX = "
 					+ woPre + " and wo.REFERENCENUMBER =" + woNo;
 			st = connection.createStatement();
 			rs = st.executeQuery(sql);
@@ -279,7 +279,7 @@ public class DBConnection {
 			st.close();
 			rs.close();
 			*/
-			String sql = "select bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, bpe.FIRSTNAME, bpe.LASTNAME from bam.ADDRESS bad, BAM.PERSON bpe "
+			String sql = "select bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, bpe.FIRSTNAME, bpe.LASTNAME from bam.ADDRESS bad, bam.PERSON bpe "
 					;
 			st = connection.createStatement();
 			rs = st.executeQuery(sql);
@@ -307,7 +307,7 @@ public class DBConnection {
 		logger.debug("countWoAndMeter. Init->");
 		int result = 0;
 		try {
-			String sql = "select count(*) from WOP.WORK_ORDER wo, BAM.INSTALL_POINT ipoint, BAM.INSTALL_PLACE iplace, BAM.ASSET asset where wo.REFERENCEPREFIX ="
+			String sql = "select count(*) from WOP.WORK_ORDER wo, bam.INSTALL_POINT ipoint, bam.INSTALL_PLACE iplace, bam.ASSET asset where wo.REFERENCEPREFIX ="
 					+ woPre + " and wo.REFERENCENUMBER =" + woNo
 					+ " and wo.PLACEID = iplace.PLACEID and ipoint.INSTALLPLACE = iplace.id and asset.INSTALLPOINT = ipoint.id and asset.SERIAL ='"
 					+ meterSN + "'";
@@ -333,8 +333,8 @@ public class DBConnection {
 		System.err.println("AMM IE: checkWoExistsAPDAElectricity(" + woPre + ", " + woNo + "). Init");
 		int result = 0;
 		try {
-//			String sql = "select ipoint.ID from WOP.WORK_ORDER wo, WOP.WO_DEVICE wodev, BAM.INSTALL_POINT ipoint, BAM.INSTALL_PLACE iplace where wo.REFERENCEPREFIX ="+woPre+" and wo.REFERENCENUMBER ="+woNo+" and (wo.STATUS = 4 or wo.STATUS = 2) and (wo.WORKORDERTYPE <> 1 and wo.WORKORDERTYPE <> 10) and wo.id = wodev.workorder and wodev.TARGETID = 'ENEL_CMEC_METER' and wodev.SERIAL is null and wo.PLACEID = iplace.PLACEID and ipoint.INSTALLPLACE = iplace.ID";
-			String sql = "select ipoint.ID from WOP.WORK_ORDER wo, WOP.WO_DEVICE wodev, BAM.INSTALL_POINT ipoint, BAM.INSTALL_PLACE iplace where wo.REFERENCEPREFIX ="
+//			String sql = "select ipoint.ID from WOP.WORK_ORDER wo, WOP.WO_DEVICE wodev, bam.INSTALL_POINT ipoint, bam.INSTALL_PLACE iplace where wo.REFERENCEPREFIX ="+woPre+" and wo.REFERENCENUMBER ="+woNo+" and (wo.STATUS = 4 or wo.STATUS = 2) and (wo.WORKORDERTYPE <> 1 and wo.WORKORDERTYPE <> 10) and wo.id = wodev.workorder and wodev.TARGETID = 'ENEL_CMEC_METER' and wodev.SERIAL is null and wo.PLACEID = iplace.PLACEID and ipoint.INSTALLPLACE = iplace.ID";
+			String sql = "select ipoint.ID from WOP.WORK_ORDER wo, WOP.WO_DEVICE wodev, bam.INSTALL_POINT ipoint, bam.INSTALL_PLACE iplace where wo.REFERENCEPREFIX ="
 					+ woPre + " and wo.REFERENCENUMBER =" + woNo
 					+ " and (wo.STATUS = 4 or wo.STATUS = 2) and wo.WORKORDERTYPE in (1, 11, 21, 25) and wo.id = wodev.workorder and wodev.TARGETID = 'ENEL_CMEC_METER' and wodev.SERIAL is null and wo.PLACEID = iplace.PLACEID and ipoint.INSTALLPLACE = iplace.ID";
 			st = connection.createStatement();
@@ -355,7 +355,7 @@ public class DBConnection {
 	public boolean updateInstallPoint(String MeterSN, int iPoint) {
 		boolean result = false;
 		try {
-			String sql = "update BAM.ASSET set INSTALLPOINT = " + iPoint + " where SERIAL = '" + MeterSN + "'";
+			String sql = "update bam.ASSET set INSTALLPOINT = " + iPoint + " where SERIAL = '" + MeterSN + "'";
 			st = connection.createStatement();
 			st.executeUpdate(sql);
 			st.close();
@@ -396,7 +396,7 @@ public class DBConnection {
 		logger.debug("updatePOD. Init ->");
 		boolean result = false;
 		try {
-			String sql = "update BAM.INSTALL_POINT set pointofdelivery ='" + pod + "' where id =" + installpoint;
+			String sql = "update bam.INSTALL_POINT set pointofdelivery ='" + pod + "' where id =" + installpoint;
 			st = connection.createStatement();
 			logger.debug("updatePOD. sql: [%s] - params: [%d, %s]", sql, pod, installpoint);
 			st.executeUpdate(sql);
@@ -424,8 +424,8 @@ public class DBConnection {
 			// RFTYPE, rf1.DEVICETYPE RFTYPEID, bad.STREET, bad.NUMBER, bad.HOUSENAME,
 			// bad.CITY, wo.PLACEID, wo.ID, concat(DECODE(wo.REFERENCEPREFIX, 1,
 			// 'EXT',3,'DUP','PDA'), CHAR(wo.REFERENCENUMBER)) AS WORK_ORDER_ID,
-			// bpe.FIRSTNAME, bpe.LASTNAME from BAM.INSTALL_POINT bip, BAM.INSTALL_PLACE
-			// bipl, BAM.ADDRESS bad, WOP.WORK_ORDER wo , BAM.PERSON bpe, WOP.WO_DEVICE
+			// bpe.FIRSTNAME, bpe.LASTNAME from bam.INSTALL_POINT bip, bam.INSTALL_PLACE
+			// bipl, bam.ADDRESS bad, WOP.WORK_ORDER wo , bam.PERSON bpe, WOP.WO_DEVICE
 			// wodev, (select dev.SERIAL, devtype.TYPENAME, dev.DEVICETYPE from
 			// WOP.WORK_ORDER wo, WOP.WO_DEVICE wodev, PCM.DEVICE dev, PCM.DEVICE_TYPE
 			// devtype where wo.REFERENCEPREFIX ="+woPre+" and wo.REFERENCENUMBER ="+woNo+"
@@ -439,7 +439,7 @@ public class DBConnection {
 			// bipl.address = bad.id and bipl.contact = bpe.id and wo.placeid = bipl.placeid
 			// and wo.status = 8 and wo.id = wodev.workorder and wo.REFERENCEPREFIX
 			// ="+woPre+" and wo.REFERENCENUMBER ="+woNo;
-			String sql = "select distinct serial1.SERIAL METERSERIAL, serial1.TYPENAME METERTYPE, serial1.DEVICETYPE METERTYPEID, rf1.SERIAL RFSERIAL, rf1.TYPENAME RFTYPE, rf1.DEVICETYPE RFTYPEID, rf1.devrelid, bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, wo.PLACEID, wo.ID, concat(DECODE(wo.REFERENCEPREFIX, 1, 'EXT',3,'DUP','PDA'), CHAR(wo.REFERENCENUMBER)) AS WORK_ORDER_ID, bpe.FIRSTNAME, bpe.LASTNAME from BAM.INSTALL_POINT bip, BAM.INSTALL_PLACE bipl, BAM.ADDRESS bad, WOP.WORK_ORDER wo , BAM.PERSON bpe, WOP.WO_DEVICE wodev, (select dev.SERIAL, devtype.TYPENAME, dev.DEVICETYPE from WOP.WORK_ORDER wo, WOP.WO_DEVICE wodev, PCM.DEVICE dev, PCM.DEVICE_TYPE devtype where wo.REFERENCEPREFIX ="
+			String sql = "select distinct serial1.SERIAL METERSERIAL, serial1.TYPENAME METERTYPE, serial1.DEVICETYPE METERTYPEID, rf1.SERIAL RFSERIAL, rf1.TYPENAME RFTYPE, rf1.DEVICETYPE RFTYPEID, rf1.devrelid, bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, wo.PLACEID, wo.ID, concat(DECODE(wo.REFERENCEPREFIX, 1, 'EXT',3,'DUP','PDA'), CHAR(wo.REFERENCENUMBER)) AS WORK_ORDER_ID, bpe.FIRSTNAME, bpe.LASTNAME from bam.INSTALL_POINT bip, bam.INSTALL_PLACE bipl, bam.ADDRESS bad, WOP.WORK_ORDER wo , bam.PERSON bpe, WOP.WO_DEVICE wodev, (select dev.SERIAL, devtype.TYPENAME, dev.DEVICETYPE from WOP.WORK_ORDER wo, WOP.WO_DEVICE wodev, PCM.DEVICE dev, PCM.DEVICE_TYPE devtype where wo.REFERENCEPREFIX ="
 					+ woPre + " and wo.REFERENCENUMBER =" + woNo
 					+ " and wo.ID = wodev.workorder and wodev.TARGETID like 'WATER_METER%' and wodev.SERIAL = dev.SERIAL and dev.DEVICETYPE = devtype.id) serial1, (select dev.SERIAL, devtype.TYPENAME, dev.DEVICETYPE, devrel.id as devrelid from WOP.WORK_ORDER wo, WOP.WO_DEVICE wodev, PCM.DEVICE dev, PCM.DEVICE_TYPE devtype, PCM.DEVICE_RELATION devrel where wo.REFERENCEPREFIX ="
 					+ woPre + " and wo.REFERENCENUMBER =" + woNo
@@ -485,8 +485,8 @@ public class DBConnection {
 			// bad.NUMBER, bad.HOUSENAME, bad.CITY, wo.PLACEID, wo.ID,
 			// concat(DECODE(wo.REFERENCEPREFIX, 1, 'EXT',3,'DUP','PDA'),
 			// CHAR(wo.REFERENCENUMBER)) AS WORK_ORDER_ID, bpe.FIRSTNAME, bpe.LASTNAME from
-			// BAM.INSTALL_POINT bip, BAM.INSTALL_PLACE bipl, BAM.ADDRESS bad,
-			// WOP.WORK_ORDER wo , BAM.PERSON bpe, WOP.WO_DEVICE wodev, (select dev.SERIAL,
+			// bam.INSTALL_POINT bip, bam.INSTALL_PLACE bipl, bam.ADDRESS bad,
+			// WOP.WORK_ORDER wo , bam.PERSON bpe, WOP.WO_DEVICE wodev, (select dev.SERIAL,
 			// devtype.TYPENAME, dev.DEVICETYPE, dev2.SERIAL SERIAL2, devtype2.TYPENAME
 			// TYPENAME2, dev2.DEVICETYPE DEVICETYPE2 from WOP.WORK_ORDER wo, WOP.WO_DEVICE
 			// wodev, PCM.DEVICE dev, PCM.DEVICE_TYPE devtype, PCM.DEVICE dev2,
@@ -499,7 +499,7 @@ public class DBConnection {
 			// bipl.contact = bpe.id and wo.placeid = bipl.placeid and wo.status = 8 and
 			// wo.id = wodev.workorder and wo.REFERENCEPREFIX ="+woPre+" and
 			// wo.REFERENCENUMBER ="+woNo;
-			String sql = "select distinct serial1.devrelid, serial1.SERIAL METERSERIAL, serial1.TYPENAME METERTYPE, serial1.DEVICETYPE METERTYPEID, serial1.SERIAL2 RFSERIAL, serial1.TYPENAME2 RFTYPE, serial1.DEVICETYPE2 RFTYPEID, bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, wo.PLACEID, wo.ID, concat(DECODE(wo.REFERENCEPREFIX, 1, 'EXT',3,'DUP','PDA'), CHAR(wo.REFERENCENUMBER)) AS WORK_ORDER_ID, bpe.FIRSTNAME, bpe.LASTNAME from BAM.INSTALL_POINT bip, BAM.INSTALL_PLACE bipl, BAM.ADDRESS bad, WOP.WORK_ORDER wo , BAM.PERSON bpe, WOP.WO_DEVICE wodev, (select devrel.id as devrelid, dev.SERIAL, devtype.TYPENAME, dev.DEVICETYPE, dev2.SERIAL SERIAL2, devtype2.TYPENAME TYPENAME2, dev2.DEVICETYPE DEVICETYPE2 from WOP.WORK_ORDER wo, WOP.WO_DEVICE wodev, PCM.DEVICE dev, PCM.DEVICE_RELATION devrel, PCM.DEVICE_TYPE devtype, PCM.DEVICE dev2, PCM.DEVICE_TYPE devtype2, WOP.WO_DEVICE wodev2 where wo.REFERENCEPREFIX ="
+			String sql = "select distinct serial1.devrelid, serial1.SERIAL METERSERIAL, serial1.TYPENAME METERTYPE, serial1.DEVICETYPE METERTYPEID, serial1.SERIAL2 RFSERIAL, serial1.TYPENAME2 RFTYPE, serial1.DEVICETYPE2 RFTYPEID, bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, wo.PLACEID, wo.ID, concat(DECODE(wo.REFERENCEPREFIX, 1, 'EXT',3,'DUP','PDA'), CHAR(wo.REFERENCENUMBER)) AS WORK_ORDER_ID, bpe.FIRSTNAME, bpe.LASTNAME from bam.INSTALL_POINT bip, bam.INSTALL_PLACE bipl, bam.ADDRESS bad, WOP.WORK_ORDER wo , bam.PERSON bpe, WOP.WO_DEVICE wodev, (select devrel.id as devrelid, dev.SERIAL, devtype.TYPENAME, dev.DEVICETYPE, dev2.SERIAL SERIAL2, devtype2.TYPENAME TYPENAME2, dev2.DEVICETYPE DEVICETYPE2 from WOP.WORK_ORDER wo, WOP.WO_DEVICE wodev, PCM.DEVICE dev, PCM.DEVICE_RELATION devrel, PCM.DEVICE_TYPE devtype, PCM.DEVICE dev2, PCM.DEVICE_TYPE devtype2, WOP.WO_DEVICE wodev2 where wo.REFERENCEPREFIX ="
 					+ woPre + " and wo.REFERENCENUMBER =" + woNo
 					+ " and wo.ID = wodev.workorder and wodev.TARGETID like 'WATER_METER%' and wodev.SERIAL = dev.SERIAL and dev.DEVICETYPE = devtype.id and wodev2.TARGETID = 'RF_UNIT' and wodev2.SERIAL = dev2.SERIAL and dev2.DEVICETYPE = devtype2.id   and dev.WOREFERNUMBER = "
 					+ woNo
@@ -593,7 +593,7 @@ public class DBConnection {
 	public int getInstallPointFromInstallPlace(String iPlace) {
 		int installPoint = 0;
 		try {
-			String sql = "select ip.id IPOINTID from BAM.INSTALL_POINT ip, BAM.INSTALL_PLACE iplace where iplace.id = ip.installplace and iplace.placeid = '"
+			String sql = "select ip.id IPOINTID from bam.INSTALL_POINT ip, bam.INSTALL_PLACE iplace where iplace.id = ip.installplace and iplace.placeid = '"
 					+ iPlace + "'";
 			st = connection.createStatement();
 			rs = st.executeQuery(sql);
@@ -613,7 +613,7 @@ public class DBConnection {
 	public boolean updateWaterAsset(int InstallPoint, String newTypeName, String oldTypeName, String Serial) {
 		boolean result = false;
 		try {
-			String sql = "update BAM.ASSET set TYPENAME = '" + newTypeName + "' where SERIAL = '" + Serial
+			String sql = "update bam.ASSET set TYPENAME = '" + newTypeName + "' where SERIAL = '" + Serial
 					+ "' and TYPENAME = '" + oldTypeName + "' and INSTALLPOINT =" + InstallPoint;
 			st = connection.createStatement();
 			st.executeUpdate(sql);
@@ -630,7 +630,7 @@ public class DBConnection {
 	public boolean updateWaterAsset2(int InstallPoint, String newManufacturer, String Serial) {
 		boolean result = false;
 		try {
-			String sql = "update BAM.ASSET set MANUFACTURER = '" + newManufacturer + "' where SERIAL = '" + Serial
+			String sql = "update bam.ASSET set MANUFACTURER = '" + newManufacturer + "' where SERIAL = '" + Serial
 					+ "' and INSTALLPOINT =" + InstallPoint;
 			st = connection.createStatement();
 			st.executeUpdate(sql);
@@ -682,7 +682,7 @@ public class DBConnection {
 	public boolean updateWaterMIUAsset(String newTypeName, String oldTypeName, String Serial) {
 		boolean result = false;
 		try {
-			String sql = "update BAM.ASSET set TYPENAME = '" + newTypeName + "' where SERIAL = '" + Serial
+			String sql = "update bam.ASSET set TYPENAME = '" + newTypeName + "' where SERIAL = '" + Serial
 					+ "' and TYPENAME = '" + oldTypeName + "'";
 			st = connection.createStatement();
 			st.executeUpdate(sql);
@@ -758,7 +758,7 @@ public class DBConnection {
 	public boolean updateWMSerialAsset(int installPoint, String newSerial, String oldSerial) {
 		boolean result = false;
 		try {
-			String sql = "update BAM.ASSET set SERIAL = '" + newSerial + "' where SERIAL = '" + oldSerial
+			String sql = "update bam.ASSET set SERIAL = '" + newSerial + "' where SERIAL = '" + oldSerial
 					+ "' and INSTALLPOINT =" + installPoint;
 			st = connection.createStatement();
 			st.executeUpdate(sql);
@@ -847,7 +847,7 @@ public class DBConnection {
 	public boolean updateWaterMIUSerialAsset(String oldMIUSerial, String newMIUSerial, String deviceTypeName) {
 		boolean result = false;
 		try {
-			String sql = "update BAM.ASSET set SERIAL = '" + newMIUSerial + "' where SERIAL = '" + oldMIUSerial
+			String sql = "update bam.ASSET set SERIAL = '" + newMIUSerial + "' where SERIAL = '" + oldMIUSerial
 					+ "' and TYPENAME = '" + deviceTypeName + "'";
 			st = connection.createStatement();
 			st.executeUpdate(sql);
@@ -1035,7 +1035,7 @@ public class DBConnection {
 	public int checkWoExistsAPDAWater(int woPre, int woNo) {
 		int result = 0;
 		try {
-			String sql = "select ipoint.ID from WOP.WORK_ORDER wo, WOP.WO_DEVICE wodev, BAM.INSTALL_POINT ipoint, BAM.INSTALL_PLACE iplace where wo.REFERENCEPREFIX ="
+			String sql = "select ipoint.ID from WOP.WORK_ORDER wo, WOP.WO_DEVICE wodev, bam.INSTALL_POINT ipoint, bam.INSTALL_PLACE iplace where wo.REFERENCEPREFIX ="
 					+ woPre + " and wo.REFERENCENUMBER =" + woNo
 					+ " and wo.STATUS = 4 and (wo.WORKORDERTYPE <> 1 and wo.WORKORDERTYPE <> 10) and wo.id = wodev.workorder and wodev.TARGETID like 'WATER_METER%' and wo.PLACEID = iplace.PLACEID and ipoint.INSTALLPLACE = iplace.ID";
 			st = connection.createStatement();
@@ -1057,7 +1057,7 @@ public class DBConnection {
 		Q6MWCustomerInfo customerInfo = new Q6MWCustomerInfo();
 		System.err.println("AMM IE: returnWaterCustomerInfo(" + woPre + ", " + woNo + "). Init");
 		try {
-			String sql = "select asset.id AID, bip.id IP, asset.serial METER, dev.DEVICETYPE, dev2.SERIAL MIU, bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, concat((CASE wo.REFERENCEPREFIX WHEN 1 THEN 'EXT' when 3 then 'DUP' ELSE 'PDA' END), (wo.REFERENCENUMBER)) AS WORK_ORDER_ID, bipl.PLACEID, bpe.FIRSTNAME, bpe.LASTNAME from BAM.INSTALL_POINT bip, BAM.INSTALL_PLACE bipl, BAM.ADDRESS bad, WOP.WORK_ORDER wo , BAM.PERSON bpe, BAM.ASSET asset, PCM.DEVICE dev LEFT OUTER JOIN PCM.DEVICE_RELATION devrel on dev.id = devrel.target and dev.id = devrel.target LEFT OUTER JOIN PCM.DEVICE dev2 on devrel.source = dev2.id where bip.installplace = bipl.id and bipl.address =  bad.id and bipl.contact = bpe.id and wo.placeid = bipl.placeid and bip.id = asset.installpoint and asset.serial = dev.serial and wo.REFERENCEPREFIX = dev.WOREFERPREFIX and wo.REFERENCENUMBER = dev.WOREFERNUMBER and wo.REFERENCEPREFIX ="
+			String sql = "select asset.id AID, bip.id IP, asset.serial METER, dev.DEVICETYPE, dev2.SERIAL MIU, bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, concat((CASE wo.REFERENCEPREFIX WHEN 1 THEN 'EXT' when 3 then 'DUP' ELSE 'PDA' END), (wo.REFERENCENUMBER)) AS WORK_ORDER_ID, bipl.PLACEID, bpe.FIRSTNAME, bpe.LASTNAME from bam.INSTALL_POINT bip, bam.INSTALL_PLACE bipl, bam.ADDRESS bad, WOP.WORK_ORDER wo , bam.PERSON bpe, bam.ASSET asset, PCM.DEVICE dev LEFT OUTER JOIN PCM.DEVICE_RELATION devrel on dev.id = devrel.target and dev.id = devrel.target LEFT OUTER JOIN PCM.DEVICE dev2 on devrel.source = dev2.id where bip.installplace = bipl.id and bipl.address =  bad.id and bipl.contact = bpe.id and wo.placeid = bipl.placeid and bip.id = asset.installpoint and asset.serial = dev.serial and wo.REFERENCEPREFIX = dev.WOREFERPREFIX and wo.REFERENCENUMBER = dev.WOREFERNUMBER and wo.REFERENCEPREFIX ="
 					+ woPre + " and wo.REFERENCENUMBER =" + woNo + " and bip.NETWORK = 2";
 			st = connection.createStatement();
 			rs = st.executeQuery(sql);
@@ -1201,7 +1201,7 @@ public class DBConnection {
 	public Q6MWCustomerInfo returnWaterCustomerInfoUnexecuted(int woPre, long woNo) {
 		Q6MWCustomerInfo customerInfo = new Q6MWCustomerInfo();
 		try {
-			String sql = "select bip.id IP, bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, concat((CASE wo.REFERENCEPREFIX WHEN 1 THEN 'EXT' when 3 then 'DUP' ELSE 'PDA' END), (wo.REFERENCENUMBER)) AS WORK_ORDER_ID, bipl.PLACEID, bpe.FIRSTNAME, bpe.LASTNAME from BAM.INSTALL_POINT bip, BAM.INSTALL_PLACE bipl, BAM.ADDRESS bad, WOP.WORK_ORDER wo , BAM.PERSON bpe where bip.installplace = bipl.id and bipl.address =  bad.id and bipl.contact = bpe.id and wo.placeid = bipl.placeid and wo.REFERENCEPREFIX ="
+			String sql = "select bip.id IP, bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, concat((CASE wo.REFERENCEPREFIX WHEN 1 THEN 'EXT' when 3 then 'DUP' ELSE 'PDA' END), (wo.REFERENCENUMBER)) AS WORK_ORDER_ID, bipl.PLACEID, bpe.FIRSTNAME, bpe.LASTNAME from bam.INSTALL_POINT bip, bam.INSTALL_PLACE bipl, bam.ADDRESS bad, WOP.WORK_ORDER wo , bam.PERSON bpe where bip.installplace = bipl.id and bipl.address =  bad.id and bipl.contact = bpe.id and wo.placeid = bipl.placeid and wo.REFERENCEPREFIX ="
 					+ woPre + " and wo.REFERENCENUMBER =" + woNo
 					+ " and bip.NETWORK = 2 and (wo.STATUS = 2 or wo.STATUS = 4)";
 			st = connection.createStatement();
@@ -1469,7 +1469,7 @@ public class DBConnection {
 			int result = st.executeUpdate(sql);
 			if (result == 1) {
 				System.err.println("AMM IE: Deleting of the row identified as: " + miuSerial + "/" + oldMiuTypeName
-						+ " in BAM.ASSET");
+						+ " in bam.ASSET");
 			} else {
 				System.err.println("AMM IE: Error while performing query");
 			}
@@ -1493,7 +1493,7 @@ public class DBConnection {
 		boolean result = false;
 		try {
 			System.err.println("AMM IE: updateInstallPointAndElectricalMeterPartnership(). Init");
-			String sql = "update BAM.INSTPOINT_EMETER set INSTALLPOINT = " + installPoint + " where SERIAL = '"
+			String sql = "update bam.INSTPOINT_EMETER set INSTALLPOINT = " + installPoint + " where SERIAL = '"
 					+ meterSerial + "'";
 			st = connection.createStatement();
 			st.executeUpdate(sql);
@@ -1518,7 +1518,7 @@ public class DBConnection {
 		boolean result = false;
 		try {
 			System.err.println("AMM IE: updateInstallPointAndWaterMeterPartnership(). Init");
-			String sql = "update BAM.INSTPOINT_WMETER set INSTALLPOINT = " + installPoint + " where SERIAL = '"
+			String sql = "update bam.INSTPOINT_WMETER set INSTALLPOINT = " + installPoint + " where SERIAL = '"
 					+ meterSerial + "'";
 			st = connection.createStatement();
 			st.executeUpdate(sql);
@@ -1532,7 +1532,7 @@ public class DBConnection {
 	}
 
 	/**
-	 * Updating of the typename in the BAM.INSTPOINT_WMETER table.
+	 * Updating of the typename in the bam.INSTPOINT_WMETER table.
 	 * 
 	 * @param typename    new typename
 	 * @param meterSerial meterSerial
@@ -1542,7 +1542,7 @@ public class DBConnection {
 		boolean result = false;
 		try {
 			System.err.println("AMM IE: updateInstallPointWaterTypename(). Init");
-			String sql = "update BAM.INSTPOINT_WMETER set TYPENAME = '" + typename + "' where SERIAL = '" + meterSerial
+			String sql = "update bam.INSTPOINT_WMETER set TYPENAME = '" + typename + "' where SERIAL = '" + meterSerial
 					+ "'";
 			st = connection.createStatement();
 			st.executeUpdate(sql);
@@ -1672,7 +1672,7 @@ public class DBConnection {
 		boolean result = false;
 		try {
 			System.err.println("AMM IE: updateInstallPointWaterMeterBySerial(). Init");
-			String sql = "update BAM.INSTPOINT_WMETER set SERIAL = '" + newMeterSerial + "' where SERIAL = '"
+			String sql = "update bam.INSTPOINT_WMETER set SERIAL = '" + newMeterSerial + "' where SERIAL = '"
 					+ oldMeterSerial + "'" + " AND INSTALLPOINT = " + installPoint;
 			st = connection.createStatement();
 			st.executeUpdate(sql);
