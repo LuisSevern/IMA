@@ -279,7 +279,7 @@ public class DBConnection {
 			st.close();
 			rs.close();
 			*/
-			String sql = "select bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, bpe.FIRSTNAME, bpe.LASTNAME from BAM.ADDRESS bad, BAM.PERSON bpe "
+			String sql = "select bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, bpe.FIRSTNAME, bpe.LASTNAME from bam.ADDRESS bad, BAM.PERSON bpe "
 					;
 			st = connection.createStatement();
 			rs = st.executeQuery(sql);
