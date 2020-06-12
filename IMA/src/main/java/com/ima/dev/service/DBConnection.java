@@ -114,6 +114,7 @@ public class DBConnection {
 				logger.error("DBConnection. Error when gettig connection url");
 				throw new Exception("DBConnection. Error when gettig connection url.");
 			}
+			System.out.println("Variable de entorno " + url);
 			connection = DriverManager.getConnection(url);
 			// "jdbc:mysql://[(host=localhost,port=3306,user=luis,password=luis)]/?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC");
 			connection.setAutoCommit(autoCommitOn);
