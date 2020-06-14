@@ -55,25 +55,23 @@ public class DBConnection {
 	private ResultSet resultSet = null;
 
 	final private String host = "localhost:3306";
-	final private String user = "developer";
-	final private String passwd = "developer";
+	final private String user = "ima_user";
+	final private String passwd = "ima_user_2020";
 	private static final Logger logger = LogManager.getLogger(DBConnection.class);
 
 	private static String url;
 	static {
 		StringBuilder salida = new StringBuilder();
-		
-		
-		try (
-			InputStream input = DBConnection.class.getClassLoader().getResourceAsStream("jdbc.properties")){
+
+		try (InputStream input = DBConnection.class.getClassLoader().getResourceAsStream("jdbc.properties")) {
 			Properties prop = new Properties();
 			// load a properties file
 			prop.load(input);
-			String url= System.getenv("IMA_DB_URL");
-			
-			if (url==null || url.isEmpty()) {
-				url = prop.getProperty("db.url")!=null?prop.getProperty("db.url"):"localhost";
-				System.out.println("Variable de entorno static " + url);
+			String url = System.getenv("IMA_DB_URL");
+
+			if (url == null || url.isEmpty()) {
+				url = prop.getProperty("db.url") != null ? prop.getProperty("db.url") : "localhost";
+				System.out.println("Variable de entorno de properties: " + url);
 			}
 			String user = prop.getProperty("db.user");
 			String pass = prop.getProperty("db.password");
@@ -90,33 +88,38 @@ public class DBConnection {
 	}
 
 	public DBConnection() throws Exception {
-		this(true);
+		this(true, false);
 	}
 
 	/**
 	 * Constructor para crear conexion especificando si se quiere autocommit o no.
 	 * 
-	 * @param autoCommitOn boolean
-	 * @throws Exception 
+	 * @param autoCommitOn              boolean
+	 * @param connectURLfromEnvironment boolean, si true cogerá la cadena de
+	 *                                  conexión de variable de entorno, si no usará
+	 *                                  localhost.
+	 * @throws Exception
 	 */
-	public DBConnection(boolean autoCommitOn) throws Exception {
+	public DBConnection(boolean autoCommitOn, boolean connectURLfromEnvironment) throws Exception {
 		try {
 			// This will load the MySQL driver, each DB has its own driver
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-
+			String conexion = "";
 			// Setup the connection with the DB
-			/*
-			 * connect = DriverManager .getConnection("jdbc:mysql://" + host + "/world?" +
-			 * "user=" + user + "&password=" + passwd );
-			 */			
-			if (url == null || url.isEmpty()) {
-				System.out.println("Variable de entorno" + url);
-				logger.error("DBConnection. Error when gettig connection url");
-				throw new Exception("DBConnection. Error when gettig connection url.");
+			if (connectURLfromEnvironment) {
+				if (url == null || url.isEmpty()) {
+					System.out.println("Variable de entorno" + url);
+					logger.error("DBConnection. Error when gettig connection url");
+					throw new Exception("DBConnection. Error when gettig connection url.");
+				}
+				System.out.println("Variable de entorno " + url);
+				conexion = String.valueOf(url);
 			}
-			System.out.println("Variable de entorno " + url);
-			connection = DriverManager.getConnection(url);
-			// "jdbc:mysql://[(host=localhost,port=3306,user=luis,password=luis)]/?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC");
+			if (!connectURLfromEnvironment) {
+				conexion = "jdbc:mysql://[(host=localhost,port=3306,user=" + user + ",password=" + passwd
+						+ ")]/?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+			}
+			connection = DriverManager.getConnection(conexion);
 			connection.setAutoCommit(autoCommitOn);
 			this.autocommitOn = autoCommitOn;
 			logger.debug("DBConnection. Connected!");
@@ -126,40 +129,6 @@ public class DBConnection {
 		}
 	}
 
-	// Accessing to DB through the Datasource defined in server
-	/*
-	 * public DBConnection(){
-	 * 
-	 * // Production try { String ds = "java:comp/env/jdbc/db"; InitialContext
-	 * context = new InitialContext(); this.dataSource =
-	 * (DataSource)context.lookup(ds); if (this.dataSource != null){ connection =
-	 * this.dataSource.getConnection(); } } catch (NamingException e) {
-	 * System.out.println("Exception in the context creation: 1"); } catch
-	 * (SQLException e){ System.out.println("Exception in the context creation: 2");
-	 * } } / // Error Control in AMM IE. End
-	 * 
-	 * public String testDataBase () { String value = ""; String serialNumberMeter =
-	 * "09I9M5N2102800026"; String sql =
-	 * "select neuronid from rmm.ce where serialnumber = '" + serialNumberMeter +
-	 * "'";
-	 * 
-	 * try { st = connection.createStatement(); if (st == null){
-	 * System.err.println("THERE IS NOT ST"); } else {
-	 * System.err.println("THERE IS ST"); } rs = st.executeQuery(sql);
-	 * System.err.println("AFTER TO PERFORMING THE QUERY"); while (rs.next()){ value
-	 * = rs.getString("neuronid");
-	 * System.out.println("The retrieved value has been: " + value); } rs.close();
-	 * st.close(); } catch (SQLException e) { e.printStackTrace(); value = "Error";
-	 * }
-	 * 
-	 * return value; }
-	 * 
-	 * // Error Control in AMM IE. Begin // Closing the DB connection /** Method to
-	 * closing the connection
-	 * 
-	 * @throws SQLException
-	 * 
-	 */
 	/**
 	 * Cierra la conexi�n. Si el autocommit no est� activado, hace un rollback.
 	 */
@@ -261,27 +230,25 @@ public class DBConnection {
 		logger.debug("returnCustomerInfo: Init->");
 		Q2CustomerInfo customerInfo = new Q2CustomerInfo();
 		try {
-	/*		String sql = "select bip.ID, bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, concat((CASE wo.REFERENCEPREFIX WHEN 1 THEN 'EXT' when 3 then 'DUP' ELSE 'PDA' END), CHAR(wo.REFERENCENUMBER)) AS WORK_ORDER_ID, bpe.FIRSTNAME, bpe.LASTNAME from bam.INSTALL_POINT bip, bam.INSTALL_PLACE bipl, bam.ADDRESS bad, WOP.WORK_ORDER wo , bam.PERSON bpe where bip.installplace = bipl.id and bipl.address =  bad.id and bipl.contact = bpe.id and wo.placeid = bipl.placeid and wo.REFERENCEPREFIX = "
-					+ woPre + " and wo.REFERENCENUMBER =" + woNo;
-			st = connection.createStatement();
-			rs = st.executeQuery(sql);
-			logger.debug("returnCustomerInfo. sql: [%s] - params: [%d %ld]", sql, woPre, woNo);
-			while (rs.next()) {
-				customerInfo.setCustomerFirstName(rs.getString("FIRSTNAME"));
-				customerInfo.setCustomerLastName(rs.getString("LASTNAME"));
-				customerInfo.setPremiseCity(rs.getString("CITY"));
-				customerInfo.setPremiseHouseName(rs.getString("HOUSENAME"));
-				customerInfo.setPremiseNumber(rs.getString("NUMBER"));
-				customerInfo.setPremiseStreet(rs.getString("STREET"));
-				customerInfo.setWorkOrderID(rs.getString("WORK_ORDER_ID"));
-				customerInfo.setInstallPoint(rs.getInt("ID"));
-			}
-			logger.debug("returnCustomerInfo. Results: [%s] ", customerInfo.toString());
-			st.close();
-			rs.close();
-			*/
-			String sql = "select bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, bpe.FIRSTNAME, bpe.LASTNAME from bam.ADDRESS bad, bam.PERSON bpe "
-					;
+			/*
+			 * String sql =
+			 * "select bip.ID, bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, concat((CASE wo.REFERENCEPREFIX WHEN 1 THEN 'EXT' when 3 then 'DUP' ELSE 'PDA' END), CHAR(wo.REFERENCENUMBER)) AS WORK_ORDER_ID, bpe.FIRSTNAME, bpe.LASTNAME from bam.INSTALL_POINT bip, bam.INSTALL_PLACE bipl, bam.ADDRESS bad, WOP.WORK_ORDER wo , bam.PERSON bpe where bip.installplace = bipl.id and bipl.address =  bad.id and bipl.contact = bpe.id and wo.placeid = bipl.placeid and wo.REFERENCEPREFIX = "
+			 * + woPre + " and wo.REFERENCENUMBER =" + woNo; st =
+			 * connection.createStatement(); rs = st.executeQuery(sql);
+			 * logger.debug("returnCustomerInfo. sql: [%s] - params: [%d %ld]", sql, woPre,
+			 * woNo); while (rs.next()) {
+			 * customerInfo.setCustomerFirstName(rs.getString("FIRSTNAME"));
+			 * customerInfo.setCustomerLastName(rs.getString("LASTNAME"));
+			 * customerInfo.setPremiseCity(rs.getString("CITY"));
+			 * customerInfo.setPremiseHouseName(rs.getString("HOUSENAME"));
+			 * customerInfo.setPremiseNumber(rs.getString("NUMBER"));
+			 * customerInfo.setPremiseStreet(rs.getString("STREET"));
+			 * customerInfo.setWorkOrderID(rs.getString("WORK_ORDER_ID"));
+			 * customerInfo.setInstallPoint(rs.getInt("ID")); }
+			 * logger.debug("returnCustomerInfo. Results: [%s] ", customerInfo.toString());
+			 * st.close(); rs.close();
+			 */
+			String sql = "select bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, bpe.FIRSTNAME, bpe.LASTNAME from bam.ADDRESS bad, bam.PERSON bpe ";
 			st = connection.createStatement();
 			rs = st.executeQuery(sql);
 			logger.debug("returnCustomerInfo. sql: [%s] - params: [%d %ld]", sql, woPre, woNo);
