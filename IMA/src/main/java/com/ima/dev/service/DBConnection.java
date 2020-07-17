@@ -1,9 +1,7 @@
 package main.java.com.ima.dev.service;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.AccessDeniedException;
 
 //import java.io.*;
 //import java.sql.Connection;
@@ -81,7 +79,6 @@ public class DBConnection {
 
 		} catch (IOException ex) {
 			logger.error("Error al obtener cadena de conexión de bbdd.");
-			System.out.println("IO" + ex);
 		}
 
 		url = salida.toString();
@@ -108,7 +105,6 @@ public class DBConnection {
 			// Setup the connection with the DB
 			if (connectURLfromEnvironment) {
 				if (url == null || url.isEmpty()) {
-					System.out.println("Variable de entorno" + url);
 					logger.error("DBConnection. Error when gettig connection url");
 					throw new Exception("DBConnection. Error when gettig connection url.");
 				}
@@ -130,7 +126,7 @@ public class DBConnection {
 	}
 
 	/**
-	 * Cierra la conexi�n. Si el autocommit no est� activado, hace un rollback.
+	 * Cierra la conexion. Si el autocommit no est� activado, hace un rollback.
 	 */
 	public void closeConnection() {
 		try {
