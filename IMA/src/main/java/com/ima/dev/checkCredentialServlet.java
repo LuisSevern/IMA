@@ -53,15 +53,15 @@ public class checkCredentialServlet extends HttpServlet {
 			boolean result = users.checkConnection(users.searchCredentials(session.getAttribute("username").toString()),
 					password);
 			*/
-			boolean result = true;
-			if (result) {
+//			if (result) {
 				dispatcher = request.getRequestDispatcher("Q2changeinstallpointsingle.jsp");
 				dispatcher.forward(request, response);
-			} else {
+	/*		} else {
 				request.setAttribute("errormsg", "Login Failed!");
 				dispatcher = request.getRequestDispatcher("Login.jsp");
 				dispatcher.forward(request, response);
 			}
+	*/
 		} else {
 			request.setAttribute("errormsg", "Login Failed!");
 			dispatcher = request.getRequestDispatcher("Login.jsp");

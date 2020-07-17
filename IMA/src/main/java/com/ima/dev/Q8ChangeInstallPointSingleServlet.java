@@ -124,7 +124,10 @@ public class Q8ChangeInstallPointSingleServlet extends HttpServlet {
 				request.setAttribute("errormsg", "Error Message: The same workorder was entered twice.");
 				dispatcher = request.getRequestDispatcher("Q6changeinstallpointwater.jsp");
 			}
-			dispatcher.forward(request, response);
+			// SONARQUBE
+			if (dispatcher != null) {
+				dispatcher.forward(request, response);
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

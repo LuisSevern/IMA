@@ -192,7 +192,7 @@ public class DBConnection {
 
 	// Q1 - Change install point
 	public String changeInstallPoint(int installPoint1, int installPoint2, String serialNumber1, String workOrderRef1,
-			String serialNumber2, String workOrderRef2) {
+			String serialNumber2, String workOrderRef2) throws SQLException {
 		// Q1SPResult spResult = new Q1SPResult();
 		CallableStatement cs = null;
 		try {
@@ -216,6 +216,9 @@ public class DBConnection {
 			// TODO Auto-generated catch block
 			return e.getMessage();
 			// spResult.setResult(false);
+		} finally {
+			if (cs!=null) 
+				cs.close();
 		}
 		return "true";
 	}

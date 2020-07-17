@@ -163,7 +163,10 @@ public class Q1PremiseDetailsServlet extends HttpServlet {
 				request.setAttribute("errormsg", "Error Message: The same workorder was entered twice.");
 				dispatcher = request.getRequestDispatcher("Q1changeinstallpoint.jsp");
 			}
-			dispatcher.forward(request, response);
+			//SONARQUBE
+			if (dispatcher != null) {
+				dispatcher.forward(request, response);
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
