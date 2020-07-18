@@ -142,9 +142,8 @@ public class getUsers {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				conn = false;
-			} finally {
-				return conn;
 			}
+			return conn;
 		} else
 			return conn;
 	}
