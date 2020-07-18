@@ -54,7 +54,7 @@ public class DBConnection {
 
 	final private String host = "localhost:3306";
 	final private String user = "ima_user";
-	//final private String passwd = "ima_user_2020";
+	final private String passwd = "ima_user_2020";
 	private static final Logger logger = LogManager.getLogger(DBConnection.class);
 
 	private static String url;
@@ -74,7 +74,7 @@ public class DBConnection {
 			String user = prop.getProperty("db.user");
 			String pass = prop.getProperty("db.password");
 			salida.append("jdbc:mysql://[(host=").append(url).append(",port=3306,user=").append(user)
-					.append(",password=").append("ima_user_2020") //pass
+					.append(",password=").append(pass)
 					.append(")]/?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC");
 
 		} catch (IOException ex) {
@@ -112,7 +112,7 @@ public class DBConnection {
 				conexion = String.valueOf(url);
 			}
 			if (!connectURLfromEnvironment) {
-				conexion = "jdbc:mysql://[(host=localhost,port=3306,user=" + user + ",password=ima_user_2020" //+ passwd
+				conexion = "jdbc:mysql://[(host=localhost,port=3306,user=" + user + ",password=" + passwd
 						+ ")]/?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
 			}
 			connection = DriverManager.getConnection(conexion);
