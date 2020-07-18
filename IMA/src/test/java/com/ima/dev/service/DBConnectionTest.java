@@ -20,12 +20,12 @@ public class DBConnectionTest {
 	private long woNo;
 	private String serialNumber;
 
-	@BeforeClass
+	@Before
 	public void openConnectionRollback() throws Exception {
 		this.dbconn = new DBConnection(false, true);
 	}
 
-	@AfterClass
+	@After
 	public void closeConnection() {
 		this.dbconn.closeConnection();
 	}
