@@ -287,13 +287,23 @@ public class DBConnection {
 		logger.debug("countWoAndMeter. Init->");
 		int result = 0;
 		try {
-			String sql = "select count(*) from WOP.WORK_ORDER wo, bam.INSTALL_POINT ipoint, bam.INSTALL_PLACE iplace, bam.ASSET asset where wo.REFERENCEPREFIX ="
+			/*String sql = "select count(*) from WOP.WORK_ORDER wo, bam.INSTALL_POINT ipoint, bam.INSTALL_PLACE iplace, bam.ASSET asset where wo.REFERENCEPREFIX ="
 					+ woPre + " and wo.REFERENCENUMBER =" + woNo
 					+ " and wo.PLACEID = iplace.PLACEID and ipoint.INSTALLPLACE = iplace.id and asset.INSTALLPOINT = ipoint.id and asset.SERIAL ='"
 					+ meterSN + "'";
 			st = connection.createStatement();
 			logger.debug("countWoAndMeter. sql: [%s] - params: [%d %ld %s]", sql, woPre, woNo, meterSN);
 			rs = st.executeQuery(sql);
+			*/
+			String sql = "select count(*) from WOP.WORK_ORDER wo, bam.INSTALL_POINT ipoint, bam.INSTALL_PLACE iplace, bam.ASSET asset "
+					+ " where wo.REFERENCEPREFIX =? and wo.REFERENCENUMBER =? and wo.PLACEID = iplace.PLACEID and ipoint.INSTALLPLACE = iplace.id "
+					+ " and asset.INSTALLPOINT = ipoint.id and asset.SERIAL =?";
+			PreparedStatement stmt1=null;
+			stmt1 = connection.prepareStatement(sql);
+			stmt1.setInt(1,  woPre);
+			stmt1.setLong(2, woNo);
+			stmt1.setString(3,meterSN);
+			rs = stmt1.executeQuery();
 			while (rs.next()) {
 				result = rs.getInt(1);
 			}
