@@ -162,11 +162,23 @@ public class DBConnection {
 		Q1Premise premiseInfo = new Q1Premise();
 		System.err.println("AMM IE: returnPremiseInfo(" + woPre + ", " + woNo + ", " + meterSN + "). Init");
 		try {
-			String sql = "select bat.ID AS ASSETID, bat.TYPENAME, bat.SERIAL, bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, concat(DECODE(wo.REFERENCEPREFIX, 1, 'EXT',3,'DUP','PDA'), CHAR(wo.REFERENCENUMBER)) AS WORK_ORDER_ID, wo.LASTUPDATEDATE, bpe.FIRSTNAME, bpe.LASTNAME from bam.ASSET bat, bam.INSTALL_POINT bip, bam.INSTALL_PLACE bipl, bam.ADDRESS bad, WOP.WORK_ORDER wo , bam.PERSON bpe where bat.installpoint = bip.id and bip.installplace = bipl.id and bipl.address =  bad.id and bipl.contact = bpe.id and wo.placeid = bipl.placeid and wo.REFERENCEPREFIX = "
-					+ woPre + " and wo.REFERENCENUMBER = " + woNo + " and bat.SERIAL = '" + meterSN
+		/*	String sql = "select bat.ID AS ASSETID, bat.TYPENAME, bat.SERIAL, bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, concat(DECODE(wo.REFERENCEPREFIX, 1, 'EXT',3,'DUP','PDA'), CHAR(wo.REFERENCENUMBER)) AS WORK_ORDER_ID, wo.LASTUPDATEDATE, bpe.FIRSTNAME, bpe.LASTNAME from bam.ASSET bat, bam.INSTALL_POINT bip, bam.INSTALL_PLACE bipl, bam.ADDRESS bad, WOP.WORK_ORDER wo , bam.PERSON bpe where bat.installpoint = bip.id and bip.installplace = bipl.id and bipl.address =  bad.id and bipl.contact = bpe.id and wo.placeid = bipl.placeid and wo.REFERENCEPREFIX = "
+					+ woPre + " and wo.REFERENCENUMBER =?" + woNo + " and bat.SERIAL = '" + meterSN
 					+ "' and bip.NETWORK = 0";
+
 			st = connection.createStatement();
 			rs = st.executeQuery(sql);
+		*/	
+			String sql = "select bat.ID AS ASSETID, bat.TYPENAME, bat.SERIAL, bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, concat(DECODE(wo.REFERENCEPREFIX, 1, 'EXT',3,'DUP','PDA'), CHAR(wo.REFERENCENUMBER)) AS WORK_ORDER_ID, wo.LASTUPDATEDATE, bpe.FIRSTNAME, bpe.LASTNAME from bam.ASSET bat, bam.INSTALL_POINT bip, bam.INSTALL_PLACE bipl, bam.ADDRESS bad, WOP.WORK_ORDER wo , bam.PERSON bpe where bat.installpoint = bip.id and bip.installplace = bipl.id and bipl.address =  bad.id and bipl.contact = bpe.id and wo.placeid = bipl.placeid "
+					+"and wo.REFERENCEPREFIX = ? and wo.REFERENCENUMBER =? and bat.SERIAL =? and bip.NETWORK = 0";
+
+			PreparedStatement stmt1=null;
+			stmt1 = connection.prepareStatement(sql);
+			stmt1.setInt(1,  woPre);
+			stmt1.setLong(2, woNo);
+			stmt1.setString(3,meterSN);
+			rs = stmt1.executeQuery();
+			
 			while (rs.next()) {
 				premiseInfo.setASSETID(rs.getString("ASSETID"));
 				premiseInfo.setTYPENAME(rs.getString("TYPENAME"));
