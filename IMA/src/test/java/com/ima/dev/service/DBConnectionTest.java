@@ -6,7 +6,9 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import main.java.com.ima.dev.dto.Q2CustomerInfo;
@@ -18,12 +20,12 @@ public class DBConnectionTest {
 	private long woNo;
 	private String serialNumber;
 
-	@Before
+	@BeforeClass
 	public void openConnectionRollback() throws Exception {
 		this.dbconn = new DBConnection(false, true);
 	}
 
-	@After
+	@AfterClass
 	public void closeConnection() {
 		this.dbconn.closeConnection();
 	}

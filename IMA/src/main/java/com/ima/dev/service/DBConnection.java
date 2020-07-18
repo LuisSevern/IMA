@@ -122,6 +122,7 @@ public class DBConnection {
 
 		} catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 			logger.error("DBConnection. Error when connecting", e);
+			throw e;
 		}
 	}
 
