@@ -15,7 +15,8 @@ public class LoggingSQLCommands {
 	public void writeLog(String user, String msg)  {
 		FileWriter fstream = null;
 		BufferedWriter out = null;
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		final String formatDate = "yyyy/MM/dd HH:mm:ss";
+		DateFormat dateFormat = new SimpleDateFormat(formatDate);
 		Date date = new Date();
 		try {
 			File file = new File(LoggingPath.getLpath());
