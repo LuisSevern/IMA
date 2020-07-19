@@ -331,9 +331,10 @@ public class DBConnection {
 	}
 
 	// Q2 check if actual work order exists, is APDA and of type Electricity
-	public int checkWoExistsAPDAElectricity(long woPre, long woNo) {
+	public int checkWoExistsAPDAElectricity(long woPre, long woNo) throws SQLException {
 		System.err.println("AMM IE: checkWoExistsAPDAElectricity(" + woPre + ", " + woNo + "). Init");
 		int result = 0;
+		PreparedStatement stmt1 = null;
 		try {
 //			String sql = "select ipoint.ID from WOP.WORK_ORDER wo, WOP.WO_DEVICE wodev, bam.INSTALL_POINT ipoint, bam.INSTALL_PLACE iplace where wo.REFERENCEPREFIX ="+woPre+" and wo.REFERENCENUMBER ="+woNo+" and (wo.STATUS = 4 or wo.STATUS = 2) and (wo.WORKORDERTYPE <> 1 and wo.WORKORDERTYPE <> 10) and wo.id = wodev.workorder and wodev.TARGETID = 'ENEL_CMEC_METER' and wodev.SERIAL is null and wo.PLACEID = iplace.PLACEID and ipoint.INSTALLPLACE = iplace.ID";
 			/*
@@ -346,7 +347,7 @@ public class DBConnection {
 			String sql = "select ipoint.ID from WOP.WORK_ORDER wo, WOP.WO_DEVICE wodev, bam.INSTALL_POINT ipoint, bam.INSTALL_PLACE iplace "
 					+ " where wo.REFERENCEPREFIX =?"
 					+ " and wo.REFERENCENUMBER =? and (wo.STATUS = 4 or wo.STATUS = 2) and wo.WORKORDERTYPE in (1, 11, 21, 25) and wo.id = wodev.workorder and wodev.TARGETID = 'ENEL_CMEC_METER' and wodev.SERIAL is null and wo.PLACEID = iplace.PLACEID and ipoint.INSTALLPLACE = iplace.ID";
-			PreparedStatement stmt1 = connection.prepareStatement(sql);
+			stmt1 = connection.prepareStatement(sql);
 			stmt1.setLong(1, woPre);
 			stmt1.setLong(2, woNo);
 			rs = stmt1.executeQuery();
@@ -358,6 +359,10 @@ public class DBConnection {
 			rs.close();
 		} catch (Exception e) {
 			System.out.println("Exception is :" + e);
+		} finally {
+			if (stmt1 != null) {
+				stmt1.close();
+			}
 		}
 		System.err.println("AMM IE: checkWoExistsAPDAElectricity(). End");
 		return result;
@@ -804,13 +809,14 @@ public class DBConnection {
 		boolean result = false;
 		PreparedStatement stmt1 = null;
 		try {
-			String sql = "update bam.ASSET set TYPENAME = '" + newTypeName + "' where SERIAL = '" + Serial
+			/*String sql = "update bam.ASSET set TYPENAME = '" + newTypeName + "' where SERIAL = '" + Serial
 					+ "' and TYPENAME = '" + oldTypeName + "'";
 			st = connection.createStatement();
 			st.executeUpdate(sql);
 			st.close();
 			sqllog.writeLog("test", sql);
-			
+			*/
+			String sql = "update bam.ASSET set TYPENAME = ? where SERIAL = ? and TYPENAME = ?";
 			stmt1 = connection.prepareStatement(sql);
 			stmt1.setString(1, newTypeName);
 			stmt1.setString(2, Serial);
@@ -1346,8 +1352,8 @@ public class DBConnection {
 			sqllog.writeLog("test", sql);
 			*/
 			
-			String sql = "update WOP.OPN_ARG_VALUE set argvalue = 2"
-					+ " where wodevoperation = (select devop.id from WOP.WORK_ORDER wo, WOP.WO_DEV_OPERATION devop where wo.id = ?"
+			String sql = "update WOP.OPN_ARG_VALUE set argvalue = ? "
+					+ " where wodevoperation = (select devop.id from WOP.WORK_ORDER wo, WOP.WO_DEV_OPERATION devop where wo.id = ? "
 					+ " and wo.id = devop.workorder and devop.operationname = 'PULSE_WATERMETER_CONNECT') and argname = 'PULSE_WATERMETER_CONNECT.CONNECTED_PORT_ID'";
 			stmt1 = connection.prepareStatement(sql);
 			stmt1.setString(1, value);
@@ -1482,8 +1488,7 @@ public class DBConnection {
 			st.close();
 			sqllog.writeLog("test", sql);
 			*/
-			String sql = "update PCM.DEVICE set placeID = ? where SERIAL = '" + WMSerial
-					+ "' and DEVICETYPE =" + deviceType;
+			String sql = "update PCM.DEVICE set placeID = ? where SERIAL = ? and DEVICETYPE =?";
 			stmt1 = connection.prepareStatement(sql);
 			stmt1.setString(2, WMSerial);
 			stmt1.setInt(3, deviceType);
@@ -1732,8 +1737,7 @@ public class DBConnection {
 			rs = st.executeQuery(sql);
 			*/
 			
-			String sql = "select id from pcm.device where serial = '" + serialNumber + "'" + "and devicetype = "
-					+ deviceType;
+			String sql = "select id from pcm.device where serial = ? and devicetype = ?";
 			stmt1 = connection.prepareStatement(sql);
 			stmt1.setString(1, serialNumber);
 			stmt1.setInt(2, deviceType);
