@@ -11,7 +11,7 @@
 </head>
 <body>
 	<form action="checkCredentialServlet" method="post">
-	<h2>v72020</h2>
+	<h2>v702020</h2>
 		<div class="topheader"></div>		
 		<div class="topcontent">			
 			<div class="innerdiv">
