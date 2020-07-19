@@ -9,9 +9,9 @@
 <title>Login Form</title>
 <link href="stylesheet/AMMCSSlogin.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
+<body> 	
 	<form action="checkCredentialServlet" method="post">
-	<h2>v702020</h2>
+	<h2>v19</h2>
 		<div class="topheader"></div>		
 		<div class="topcontent">			
 			<div class="innerdiv">
