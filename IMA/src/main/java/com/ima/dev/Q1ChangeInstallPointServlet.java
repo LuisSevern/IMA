@@ -59,7 +59,7 @@ public class Q1ChangeInstallPointServlet extends HttpServlet {
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 

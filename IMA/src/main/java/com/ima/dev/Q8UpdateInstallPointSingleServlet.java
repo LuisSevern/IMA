@@ -67,7 +67,7 @@ public class Q8UpdateInstallPointSingleServlet extends HttpServlet {
 					dbconn.closeConnection();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println(e.getMessage());
 				}
 	}
 

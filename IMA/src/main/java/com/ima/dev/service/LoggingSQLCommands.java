@@ -27,18 +27,19 @@ public class LoggingSQLCommands {
 				out.newLine();
 				out.close();
 			} else {
-				file.createNewFile();
+				boolean created = file.createNewFile();
+				System.out.println(created);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		} finally {
 			if (out != null) {
 				try {
 					out.close();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println(e.getMessage());
 				}
 			}
 			if (fstream != null) {
@@ -46,7 +47,7 @@ public class LoggingSQLCommands {
 					fstream.close();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println(e.getMessage());
 				}
 			}
 		}

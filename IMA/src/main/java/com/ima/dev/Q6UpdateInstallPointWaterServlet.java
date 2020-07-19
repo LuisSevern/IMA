@@ -89,7 +89,7 @@ public class Q6UpdateInstallPointWaterServlet extends HttpServlet {
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 

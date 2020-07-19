@@ -117,7 +117,7 @@ public class Q3ChangeWaterMeterTypeServlet extends HttpServlet {
 			}
 		}catch (Exception e) {
 				// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 

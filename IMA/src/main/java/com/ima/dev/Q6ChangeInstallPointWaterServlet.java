@@ -131,8 +131,8 @@ public class Q6ChangeInstallPointWaterServlet extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// TODO Auto-generated catch block SONAR - e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 

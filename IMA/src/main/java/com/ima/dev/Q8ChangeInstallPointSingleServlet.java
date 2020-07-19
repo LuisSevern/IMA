@@ -130,7 +130,7 @@ public class Q8ChangeInstallPointSingleServlet extends HttpServlet {
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 

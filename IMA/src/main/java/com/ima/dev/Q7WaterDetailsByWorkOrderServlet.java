@@ -135,7 +135,7 @@ public class Q7WaterDetailsByWorkOrderServlet extends HttpServlet {
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 
 	}

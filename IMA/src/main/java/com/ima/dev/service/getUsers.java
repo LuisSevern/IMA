@@ -55,7 +55,6 @@ public class getUsers {
 			return printSearchEnumeration(answer);
 		} catch (NamingException nex) {
 			System.out.println("Active Directory Connection: FAILED");
-			nex.printStackTrace();
 			return null;
 		}
 	}
@@ -69,7 +68,6 @@ public class getUsers {
 			}
 			return null;
 		} catch (NamingException e) {
-			e.printStackTrace();
 			return null;
 		}
 	}
@@ -140,7 +138,6 @@ public class getUsers {
 				ctx.close();
 			} catch (NamingException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
 				conn = false;
 			}
 			return conn;
