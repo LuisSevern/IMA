@@ -18,10 +18,11 @@ public class LoggingPath {
 			File f = new File("/logs/logs.txt");
 			f.getParentFile().mkdirs();
             try {
-				f.createNewFile();
+				boolean created = f.createNewFile();
+				System.out.println(created);
 				lpath = f.getAbsolutePath();
 			} catch (IOException e) {
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 				lpath = null;
 			}
 		}

@@ -153,7 +153,7 @@ public class DBConnection {
 			connection = this.dataSource.getConnection();
 			System.err.println("AMM IE: The connection has been getting without errors.");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 
