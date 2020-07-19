@@ -127,7 +127,7 @@ public class DBConnection {
 	}
 
 	/**
-	 * Cierra la conexion. Si el autocommit no est� activado, hace un rollback.
+	 * Cierra la conexion. Si el autocommit no esta activado, hace un rollback.
 	 */
 	public void closeConnection() {
 		try {
