@@ -266,7 +266,7 @@ public class DBConnection {
 			 * logger.debug("returnCustomerInfo. Results: [%s] ", customerInfo.toString());
 			 * st.close(); rs.close();
 			 */
-			String sql = "select bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, bpe.FIRSTNAME, bpe.LASTNAME from bam.ADDRESS bad, bam.PERSON bpe ";
+			String sql = "select bad.STREET, bad.NUMBER, bad.HOUSENAME, bad.CITY, bpe.FIRSTNAME, bpe.LASTNAME from BAM.ADDRESS bad, BAM.PERSON bpe ";
 			st = connection.createStatement();
 			rs = st.executeQuery(sql);
 			logger.debug("returnCustomerInfo. sql: [%s] - params: [%d %ld]", sql, woPre, woNo);
