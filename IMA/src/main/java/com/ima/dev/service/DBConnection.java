@@ -382,7 +382,7 @@ public class DBConnection {
 			stmt1 = connection.prepareStatement(sql);
 			stmt1.setInt(1, iPoint);
 			stmt1.setString(2, MeterSN);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 			stmt1.close();
 		} catch (Exception e) {
@@ -412,7 +412,7 @@ public class DBConnection {
 			stmt1 = connection.prepareStatement(sql);
 			stmt1.setLong(1, woPre);
 			stmt1.setLong(2, woNo);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 			stmt1.close();
 		} catch (Exception e) {
@@ -447,7 +447,7 @@ public class DBConnection {
 			stmt1 = connection.prepareStatement(sql);
 			stmt1.setString(1, pod);
 			stmt1.setInt(2, installpoint);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 			stmt1.close();
 			if (result) {
@@ -641,7 +641,7 @@ public class DBConnection {
 			stmt1.setString(2, deviceSerial);
 			stmt1.setInt(3, oldDeviceTypeID);
 			stmt1.setString(4, placeID);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 			stmt1.close();
 		} catch (Exception e) {
@@ -705,7 +705,7 @@ public class DBConnection {
 			stmt1.setString(2, Serial);
 			stmt1.setString(3, oldTypeName);
 			stmt1.setInt(4, InstallPoint);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 		} catch (Exception e) {
 			System.out.println("Exception is :" + e);
@@ -733,7 +733,7 @@ public class DBConnection {
 			stmt1.setString(1, newManufacturer);
 			stmt1.setString(2, Serial);
 			stmt1.setInt(3, InstallPoint);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 		} catch (Exception e) {
 			System.out.println("Exception is :" + e);
@@ -762,7 +762,7 @@ public class DBConnection {
 			stmt1 = connection.prepareStatement(sql);
 			stmt1.setString(1, TypeName);
 			stmt1.setInt(2, woID);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 		} catch (Exception e) {
 			System.out.println("Exception is :" + e);
@@ -792,7 +792,7 @@ public class DBConnection {
 			stmt1.setInt(1, newDeviceTypeID);
 			stmt1.setString(2, deviceSerial);
 			stmt1.setInt(3, oldDeviceTypeID);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 		} catch (Exception e) {
 			System.out.println("Exception is :" + e);
@@ -821,7 +821,7 @@ public class DBConnection {
 			stmt1.setString(1, newTypeName);
 			stmt1.setString(2, Serial);
 			stmt1.setString(3, oldTypeName);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 		} catch (Exception e) {
 			System.out.println("Exception is :" + e);
@@ -853,7 +853,7 @@ public class DBConnection {
 			stmt1 = connection.prepareStatement(sql);
 			stmt1.setString(1, TypeName);
 			stmt1.setLong(2, woID);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 		} catch (Exception e) {
 			System.out.println("Exception is :" + e);
@@ -887,7 +887,7 @@ public class DBConnection {
 			stmt1 = connection.prepareStatement(sql);
 			stmt1.setString(1, TypeName);
 			stmt1.setLong(2, woID);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 		} catch (Exception e) {
 			System.out.println("Exception is :" + e);
@@ -916,7 +916,7 @@ public class DBConnection {
 			stmt1.setString(1, newSerial);
 			stmt1.setString(2, oldSerial);
 			stmt1.setString(3, placeID);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 		} catch (Exception e) {
 			System.out.println("Exception is :" + e);
@@ -945,7 +945,7 @@ public class DBConnection {
 			stmt1.setString(1, newSerial);
 			stmt1.setString(2, oldSerial);
 			stmt1.setInt(3, installPoint);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 		} catch (Exception e) {
 			System.out.println("Exception is :" + e);
@@ -976,7 +976,7 @@ public class DBConnection {
 			stmt1.setString(1, newMeterSN);
 			stmt1.setString(2, oldMeterSN);
 			stmt1.setInt(3, woID);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 		} catch (Exception e) {
 			System.out.println("Exception is :" + e);
@@ -1006,7 +1006,7 @@ public class DBConnection {
 			stmt1 = connection.prepareStatement(sql);
 			stmt1.setString(1, serial);
 			stmt1.setInt(2, woID);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 		} catch (Exception e) {
 			System.out.println("Exception is :" + e);
@@ -1043,7 +1043,7 @@ public class DBConnection {
 			stmt1 = connection.prepareStatement(sql);
 			stmt1.setString(1, serial);
 			stmt1.setInt(2, woID);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 		} catch (Exception e) {
 			System.out.println("Exception is :" + e);
@@ -1074,7 +1074,7 @@ public class DBConnection {
 			stmt1.setString(1, newMIUSerial);
 			stmt1.setString(2, oldMIUSerial);
 			stmt1.setInt(3, deviceType);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 		} catch (Exception e) {
 			System.out.println("Exception is :" + e);
@@ -1103,7 +1103,7 @@ public class DBConnection {
 			stmt1.setString(1, newMIUSerial);
 			stmt1.setString(2, oldMIUSerial);
 			stmt1.setString(3, deviceTypeName);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 		} catch (Exception e) {
 			System.out.println("Exception is :" + e);
@@ -1132,7 +1132,7 @@ public class DBConnection {
 			stmt1.setString(1, newMIUSN);
 			stmt1.setString(2, oldMIUSN);
 			stmt1.setLong(3, woID);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 		} catch (Exception e) {
 			System.out.println("Exception is :" + e);
@@ -1164,7 +1164,7 @@ public class DBConnection {
 			stmt1 = connection.prepareStatement(sql);
 			stmt1.setString(1, value);
 			stmt1.setLong(2, woid);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 		} catch (Exception e) {
 			System.out.println("Exception is :" + e);
@@ -1196,7 +1196,7 @@ public class DBConnection {
 			stmt1 = connection.prepareStatement(sql);
 			stmt1.setString(1, serial);
 			stmt1.setLong(2, woID);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 		} catch (Exception e) {
 			System.out.println("Exception is :" + e);
@@ -1224,7 +1224,7 @@ public class DBConnection {
 			stmt1 = connection.prepareStatement(sql);
 			stmt1.setString(1, serial);
 			stmt1.setLong(2, woID);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 		} catch (Exception e) {
 			System.out.println("Exception is :" + e);
@@ -1319,11 +1319,11 @@ public class DBConnection {
 			st.executeUpdate(sql);
 			st.close();
 			*/
-			String sql = "update pcm.DEVREL_DATA set ELEMENTVALUE = ? where DEVRELATIONSHIP =? and ELEMENTNAME = 'portNumber'";
+			String sql = "update pcm.DEVREL_DATA set ELEMENTVALUE =? where DEVRELATIONSHIP =? and ELEMENTNAME = 'portNumber'";
 			stmt1 = connection.prepareStatement(sql);
 			stmt1.setString(1, value);
 			stmt1.setInt(2, relationship);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 		} catch (Exception e) {
 			logger.error("updateRFMeterPort. Exception", e);
@@ -1352,13 +1352,13 @@ public class DBConnection {
 			sqllog.writeLog("test", sql);
 			*/
 			
-			String sql = "update wop.OPN_ARG_VALUE set argvalue = ? "
-					+ " where wodevoperation = (select devop.id from wop.WORK_ORDER wo, wop.WO_DEV_OPERATION devop where wo.id = ? "
+			String sql = "update wop.OPN_ARG_VALUE set argvalue =? "
+					+ " where wodevoperation = (select devop.id from wop.WORK_ORDER wo, wop.WO_DEV_OPERATION devop where wo.id =? "
 					+ " and wo.id = devop.workorder and devop.operationname = 'PULSE_WATERMETER_CONNECT') and argname = 'PULSE_WATERMETER_CONNECT.CONNECTED_PORT_ID'";
 			stmt1 = connection.prepareStatement(sql);
 			stmt1.setString(1, value);
 			stmt1.setLong(2, woid);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 		} catch (Exception e) {
 			logger.error("updateRFMeterPortArgs. Exception", e);
@@ -1493,7 +1493,7 @@ public class DBConnection {
 			stmt1.setString(2, WMSerial);
 			stmt1.setInt(3, deviceType);
 			stmt1.setString(1, placeID);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 		} catch (Exception e) {
 			System.out.println("Exception is :" + e);
@@ -1523,7 +1523,7 @@ public class DBConnection {
 			stmt1.setInt(1, woPrefix);
 			stmt1.setString(2, WMSerial);
 			stmt1.setInt(3, deviceType);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 		} catch (Exception e) {
 			System.out.println("Exception is :" + e);
@@ -1553,7 +1553,7 @@ public class DBConnection {
 			stmt1.setInt(1, woNumber);
 			stmt1.setString(2, WMSerial);
 			stmt1.setInt(3, deviceType);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 		} catch (Exception e) {
 			System.out.println("Exception is :" + e);
@@ -1626,7 +1626,7 @@ public class DBConnection {
 			stmt1 = connection.prepareStatement(sql);
 			stmt1.setInt(1, target);
 			stmt1.setLong(2, devrelid);
-			int output = stmt1.executeUpdate(sql);
+			int output = stmt1.executeUpdate();
 			result = output > 0;
 			sqllog.writeLog("test", sql);
 		} catch (Exception e) {
@@ -1814,7 +1814,7 @@ public class DBConnection {
 			stmt1 = connection.prepareStatement(sql);
 			stmt1.setString(1, serialNumber);
 			stmt1.setInt(2, deviceType);
-			int result = stmt1.executeUpdate(sql);
+			int result = stmt1.executeUpdate();
 			if (result == 1) {
 				System.err.println("AMM IE: Deleting of the row identified as: " + serialNumber + "/" + deviceType);
 			} else {
@@ -1863,7 +1863,7 @@ public class DBConnection {
 			String sql = "select target from pcm.device_relation where source = ?";
 			stmt1 = connection.prepareStatement(sql);
 			stmt1.setLong(1, idModule);
-			stmt1.executeQuery(sql);
+			stmt1.executeQuery();
 			while (rs.next()) {
 				vMetersId[position] = rs.getLong(1);
 				position++;
@@ -2001,7 +2001,7 @@ public class DBConnection {
 			stmt1 = connection.prepareStatement(sql);
 			stmt1.setString(1, miuSerial);
 			stmt1.setString(2, oldMiuTypeName);
-			int result = stmt1.executeUpdate(sql);			
+			int result = stmt1.executeUpdate();			
 			if (result == 1) {
 				System.err.println("AMM IE: Deleting of the row identified as: " + miuSerial + "/" + oldMiuTypeName
 						+ " in bam.ASSET");
