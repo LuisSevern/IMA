@@ -2260,7 +2260,7 @@ public class DBConnection {
 			rs = st.executeQuery(sql);
 			*/
 			
-			String sql = "select device.placeid, dtype.typename, CASE device.status WHEN 1 THEN 'Installed' WHEN 2  THEN 'Need Service' WHEN 4 THEN 'Being Serviced' ELSE 'Dismantled' END as status, (CASE device.woreferprefix  WHEN 1 THEN 'EXT' when 3 then 'DUP' ELSE 'PDA' END) as woreferprefix, device.worefernumber, DATE_FORMAT(device.creationdate,'%Y-%m-%d %H.%i.%s')  as creationdate, DATE_FORMAT(device.lastupdate,'%Y-%m-%d %H.%i.%s')  as lastupdate from PCM.DEVICE device, PCM.DEVICE_TYPE dtype "
+			String sql = "select device.placeid, dtype.typename, CASE device.status WHEN 1 THEN 'Installed' WHEN 2  THEN 'Need Service' WHEN 4 THEN 'Being Serviced' ELSE 'Dismantled' END as status, (CASE device.woreferprefix  WHEN 1 THEN 'EXT' when 3 then 'DUP' ELSE 'PDA' END) as woreferprefix, device.worefernumber, DATE_FORMAT(device.creationdate,'%Y-%m-%d %H.%i.%s')  as creationdate, DATE_FORMAT(device.lastupdate,'%Y-%m-%d %H.%i.%s')  as lastupdate from pcm.DEVICE device, pcm.DEVICE_TYPE dtype "
 					+ "where device.SERIAL =? and device.deviceType = dtype.id";
 			stmt1 = connection.prepareStatement(sql);
 			stmt1.setString(1, serialNumber);
