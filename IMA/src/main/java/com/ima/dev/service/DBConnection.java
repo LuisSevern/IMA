@@ -1248,7 +1248,7 @@ public class DBConnection {
 															// from PCM.DEVREL_DATA needs to be ordered by the
 															// ELEMENTVALUE field when getting the port numbers
 			st = connection.createStatement();
-			logger.debug("countWoAndMeter. sql: [%s] - params: [%s]", sql, rFSerial);
+			logger.debug("getRFDetails. sql: [%s] - params: [%s]", sql, rFSerial);
 			rs = st.executeQuery(sql);
 			while (rs.next()) {
 				Q5MiuMeterRelation rfInfo = new Q5MiuMeterRelation();
