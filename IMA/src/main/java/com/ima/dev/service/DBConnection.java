@@ -1319,7 +1319,7 @@ public class DBConnection {
 			st.executeUpdate(sql);
 			st.close();
 			*/
-			String sql = "update PCM.DEVREL_DATA set ELEMENTVALUE = ? where DEVRELATIONSHIP =? and ELEMENTNAME = 'portNumber'";
+			String sql = "update pcm.DEVREL_DATA set ELEMENTVALUE = ? where DEVRELATIONSHIP =? and ELEMENTNAME = 'portNumber'";
 			stmt1 = connection.prepareStatement(sql);
 			stmt1.setString(1, value);
 			stmt1.setInt(2, relationship);
@@ -1352,8 +1352,8 @@ public class DBConnection {
 			sqllog.writeLog("test", sql);
 			*/
 			
-			String sql = "update WOP.OPN_ARG_VALUE set argvalue = ? "
-					+ " where wodevoperation = (select devop.id from WOP.WORK_ORDER wo, WOP.WO_DEV_OPERATION devop where wo.id = ? "
+			String sql = "update wop.OPN_ARG_VALUE set argvalue = ? "
+					+ " where wodevoperation = (select devop.id from wop.WORK_ORDER wo, wop.WO_DEV_OPERATION devop where wo.id = ? "
 					+ " and wo.id = devop.workorder and devop.operationname = 'PULSE_WATERMETER_CONNECT') and argname = 'PULSE_WATERMETER_CONNECT.CONNECTED_PORT_ID'";
 			stmt1 = connection.prepareStatement(sql);
 			stmt1.setString(1, value);
