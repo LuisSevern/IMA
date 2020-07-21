@@ -1241,7 +1241,7 @@ public class DBConnection {
 		logger.debug("getRFDetails: Init ->");
 		ArrayList aMiuMeterDetails = new ArrayList();
 		try {
-			String sql = "select dev.SERIAL MIUSERIAL, devtype.TYPENAME, devrel.ID, devrel.SOURCE, devrel.TARGET, dev2.SERIAL METERSERIAL, devreldt.ELEMENTVALUE, wo.id as woid from PCM.DEVICE dev, PCM.DEVICE_RELATION devrel, PCM.DEVICE dev2, PCM.DEVREL_DATA devreldt, PCM.DEVICE_TYPE devtype, WOP.WORK_ORDER wo where dev.serial ='"
+			String sql = "select dev.SERIAL MIUSERIAL, devtype.TYPENAME, devrel.ID, devrel.SOURCE, devrel.TARGET, dev2.SERIAL METERSERIAL, devreldt.ELEMENTVALUE, wo.id as woid from pcm.DEVICE dev, pcm.DEVICE_RELATION devrel, pcm.DEVICE dev2, pcm.DEVREL_DATA devreldt, pcm.DEVICE_TYPE devtype, wop.WORK_ORDER wo where dev.serial ='"
 					+ rFSerial
 					+ "' and devrel.source = dev.id and devrel.target = dev2.id and devreldt.DEVRELATIONSHIP = devrel.ID and devreldt.ELEMENTNAME = 'portNumber' and dev.devicetype = devtype.id and dev2.woreferprefix = wo.referenceprefix and dev2.worefernumber = wo.referencenumber"
 					+ " ORDER BY devreldt.ELEMENTVALUE"; // CQ 5171. Meters are not always ordered by port number. Data
