@@ -1260,6 +1260,7 @@ public class DBConnection {
 				rfInfo.setPort(rs.getInt("ELEMENTVALUE"));
 				rfInfo.setMiuType(rs.getString("TYPENAME"));
 				rfInfo.setWoid(rs.getInt("WOID"));
+				aMiuMeterDetails = null;
 				aMiuMeterDetails.add(rfInfo);
 			}
 			logger.debug("countWoAndMeter. Results: [%d]", aMiuMeterDetails.size());
