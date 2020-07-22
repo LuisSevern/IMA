@@ -55,13 +55,13 @@ public class DBConnectionTest {
 
 	@Test
 	public void testCheckWoExistsAPDAElectricity() {
-		assertTrue(true);
+		assertTrue(false);
 
 	}
 
 	@Test
 	public void testUpdateWOStatus() {
-		assertTrue(true);
+		assertTrue(false);
 	}
 
 	@Test
