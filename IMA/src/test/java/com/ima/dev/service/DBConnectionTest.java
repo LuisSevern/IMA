@@ -55,48 +55,48 @@ public class DBConnectionTest {
 
 	@Test
 	public void testCheckWoExistsAPDAElectricity() {
-		assertTrue(true);
+		assertTrue(false);
 
 	}
 
 	@Test
 	public void testUpdateWOStatus() {
-		assertTrue(true);
+		assertTrue(false);
 	}
 
 	@Test
 	public void testUpdatePOD() {
-		assertTrue(true);
+		assertTrue(false);
 	}
 
 	@Test
 	public void testGetRFDetails() {
-		assertTrue(true);
+		assertTrue(false);
 	}
 
 	@Test
 	public void testGetRfSerial() {
-		assertTrue(true);
+		assertTrue(false);
 	}
 
 	@Test
 	public void testUpdateRFMeterPort() {
-		assertTrue(true);
+		assertTrue(false);
 	}
 
 	@Test
 	public void testUpdateRFMeterPortArgs() {
-		assertTrue(true);
+		assertTrue(false);
 	}
 
 	@Test
 	public void testReturnWaterCustomerInfo() {
-		assertTrue(true);
+		assertTrue(false);
 	}
 
 	@Test
 	public void testUpdateGenericWOStatus() {
-		assertTrue(true);
+		assertTrue(false);
 	}
 
 }
